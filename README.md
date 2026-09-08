@@ -1,5 +1,5 @@
 # STAMP Game — Vercel Static Prototype
-
+- Game Link : 'https://stampgameupdate202609081644.vercel.app/'
 - `index.html`: 브라우저에서 직접 실행되는 정적 플레이 테스트 버전
 - `data/gameData.json`: `game.db`에서 추출한 게임 데이터
 - 별도 서버/API/DB가 필요하지 않습니다.
