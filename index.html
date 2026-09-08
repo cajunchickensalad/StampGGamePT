@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STAMP Game</title>
+<style>
+:root{--bg:#f3f5f7;--panel:#fff;--panel2:#f8fafb;--border:#d8dee5;--text:#27313a;--muted:#77818b;--accent:#4169a1;--good:#3b8b68;--danger:#c45b5b}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif}button{font:inherit}
+#app{--line-width:68px;width:min(390px,100%);min-height:100dvh;margin:auto;display:flex;flex-direction:column}
+header{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:var(--panel);border-bottom:1px solid var(--border)}
+.logo{font-size:15px;font-weight:800;letter-spacing:.08em}.meta{font-size:11px;color:var(--muted)}.meta b{color:var(--text)}
+main{flex:1;overflow:auto;padding:7px}.box{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;box-shadow:0 1px 2px #00000008}.title{height:30px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--muted)}
+#lines{display:flex;gap:6px;overflow-x:auto;padding:6px;overflow-y:hidden;scrollbar-width:thin}.line-wrap{flex:0 0 var(--line-width);width:var(--line-width);display:flex;flex-direction:column;gap:4px}.line{width:var(--line-width);background:var(--panel2);border:1px solid var(--lc);border-radius:8px;overflow:hidden}.lhead{padding:6px 7px;border-bottom:1px solid var(--border);border-top:4px solid var(--lc)}.lname{font-size:20px;line-height:20px;font-weight:850;color:var(--lc)}.stat{font-size:10px;color:var(--muted);line-height:1.25}.stat b{color:var(--text)}
+.queue{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(7,1fr);gap:2px;min-height:168px;position:relative;overflow:visible}.slot{width:100%;aspect-ratio:1;border:1px solid var(--lc);border-radius:3px;display:flex;align-items:center;justify-content:center;background:#fff;color:#a5adb5;font-size:8px;font-weight:750;min-width:0;position:relative}.slot.path-cell:not(.path-start)::before{content:"";position:absolute;left:-3px;top:50%;width:3px;height:1px;background:var(--cc);transform:translateY(-50%)}.slot.turn-end::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:4px;background:var(--cc);transform:translateX(-50%);z-index:2}.slot.active-empty{background:#fff;border-color:var(--lc);color:transparent}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#cfd4d9!important;background:#eef0f2!important;color:#b8bec4!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}
+#turn{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 8px 4px;font-size:12px;font-weight:650}.turn-msg{flex:1;text-align:center}.turn-wait{height:30px;min-width:58px;padding:0 8px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);font-size:10px;font-weight:750;cursor:pointer}.turn-wait:disabled{opacity:.35;cursor:not-allowed}.turn{font-weight:800;color:var(--accent)}.status{font-size:10px;color:var(--muted);text-align:center;padding:6px 8px;border-top:1px solid var(--border);background:var(--panel2)}
+.line-action{height:36px;width:var(--line-width);border:1px solid var(--lc);border-radius:7px;background:#fff;color:var(--text);font-size:11px;font-weight:750;cursor:pointer}.line-action:hover:not(:disabled){border-color:var(--lc);background:color-mix(in srgb,var(--lc) 9%,#fff)}.line-action:disabled{opacity:.35;cursor:not-allowed}.line-action.active{box-shadow:0 0 0 2px color-mix(in srgb,var(--lc) 20%,transparent)}button:disabled{opacity:.35;cursor:not-allowed}
+#players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px;overflow:hidden}.player{background:var(--panel2);border:1px solid var(--pc);border-top:3px solid var(--pc);border-radius:8px;padding:6px}.player.current{box-shadow:0 0 0 2px color-mix(in srgb,var(--pc) 25%,transparent)}.phead{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800;color:var(--pc)}.total{font-size:16px;color:var(--text)}
+table{border-collapse:collapse;margin-top:5px;font-size:7px;text-align:center;table-layout:fixed;width:100%}th,td{border:1px solid var(--border);padding:0;width:18px;height:18px;min-width:18px;max-width:18px}th{color:var(--muted);font-weight:750}td.hit{background:color-mix(in srgb,var(--pc) 16%,#fff);color:var(--pc);font-weight:850}.score-line{font-weight:800}
+#log{height:95px;overflow:auto;padding:6px;font-size:9px;line-height:1.45;color:var(--muted)}.reward{color:var(--good);font-weight:700}.error{color:var(--danger)}
+.bottom{height:54px;display:flex;gap:6px;padding:7px;background:var(--panel);border-top:1px solid var(--border)}.bottom button{flex:1}.primary{background:#f5f7fa!important;border-color:#aeb8c2!important}
+#modal{display:none;position:fixed;inset:0;background:#17212b66;align-items:center;justify-content:center;padding:18px}.modal{width:min(360px,100%);background:#fff;border:1px solid var(--border);padding:17px;border-radius:10px;box-shadow:0 12px 40px #0002}.modal h2{margin:0 0 8px;font-size:19px}.modal button{width:100%;margin-top:14px;height:36px;border:1px solid var(--border);border-radius:7px;background:#fff}
+@media(max-width:430px){#app{width:100%;--line-width:calc((100vw - 22px - 16px)/5)}.line{width:var(--line-width)}.queue{min-height:161px}.line-action{font-size:10px}.bottom button{min-width:0}#players{grid-template-columns:1fr}.player{min-width:0}table{font-size:7px}th,td{width:18px;height:18px;min-width:18px;max-width:18px}}
+</style>
+</head>
+<body>
+<div id="app">
+<header><div class="logo">STAMP GAME</div><div class="meta">ROUND <b>1</b> · PHASE <b id="phase">-</b>/30</div></header>
+<main>
+<section class="box"><div class="title"><span>LINES</span><span>PHASE START</span></div><div id="lines"></div><div id="turn"><span class="turn-msg"></span><button id="wait" class="turn-wait" disabled>WAIT</button></div><div id="actions"></div><div id="status" class="status"></div></section>
+<section class="box"><div class="title"><span>PLAYER SCOREBOARD</span><span>INDIVIDUAL</span></div><div id="players"></div></section>
+<section class="box"><div class="title"><span>EVENT LOG</span></div><div id="log"></div></section>
+</main>
+<div class="bottom"><button id="new" class="primary">NEW GAME</button></div>
+</div>
+<div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalNew">NEW GAME</button></div></div>
+<script>
+'use strict';
+let D=null,S=null,timer=null,pendingLine=null;
+const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cls=p=>p==='Human'?'H':p==='AI 1'?'A1':p==='AI 2'?'A2':'A3';
+const lineColors={A:'#DAA520',B:'#C75BAD',C:'#5BA8C7',D:'#7DBF5E',E:'#C7875B'};
+const playerColors={Human:'#355C9A','AI 1':'#B24C6F','AI 2':'#3E8A68','AI 3':'#8A6A32'};
+const weighted=o=>{const a=Object.entries(o).map(([v,w])=>[+v,+w]).filter(x=>Number.isFinite(x[0])&&x[1]>0);if(!a.length)return 0;const total=a.reduce((s,x)=>s+x[1],0);let r=Math.random()*total;for(const [v,w] of a){r-=w;if(r<=0)return v}return a[a.length-1][0]};
+const line=id=>S.lines[String(id)];
+function log(x,c=''){const e=document.createElement('div');e.className=c;e.textContent=x;document.querySelector('#log').prepend(e)}
+function scoreRows(lid){const row=D.score_table.find(r=>String(r.line_pool_id)===String(lid));return row?[row.tier1,row.tier2,row.tier3,row.tier4,row.tier5]:[0,0,0,0,0]}
+function scoreFor(p,l){const c=S.players[p].by[l.id]||0;if(!c)return 0;const r=scoreRows(l.id);return r[Math.min(c-1,4)]||0}
+function total(p){return D.lines.reduce((n,l)=>n+scoreFor(p,l),0)}
+function resetState(){clearTimeout(timer);pendingLine=null;document.querySelector('#modal').style.display='none';S={phase:1,order:[],idx:0,lines:{},players:{},running:true,resolving:false};D.lines.forEach(l=>S.lines[String(l.id)]={buffer:[],rewards:{}});D.players.forEach(p=>{S.players[p]={by:{}};D.lines.forEach(l=>S.lines[String(l.id)].rewards[p]=0)});document.querySelector('#log').innerHTML='';log('NEW GAME');startPhase()}
+function bufferProbabilities(type){const row=D.buffer_types.find(r=>r.name===type);if(!row)return {};if(typeof row.probabilities==='string'){try{return JSON.parse(row.probabilities)}catch{return {}}}return row.probabilities||{}}
+function addBuffer(){const mp={};for(const r of D.line_phase_map||[]){if(+r.phase_number===S.phase){const bt=D.buffer_types.find(x=>+x.id===+r.buffer_type_id);if(bt)mp[r.line_pool_id]=bt.name}}
+ D.lines.forEach(l=>{const typ=mp[l.id]||'Normal',prob=bufferProbabilities(typ),s=line(l.id),cap=l.fixed_value*3,drawn=+weighted(prob),add=Math.max(0,Math.min(drawn,cap-s.buffer.length));for(let i=0;i<add;i++)s.buffer.push(null);if(add)log(`P${S.phase} · ${l.name} +${add} (${typ})`)});
+}
+function startPhase(){if(!S.running)return;S.resolving=false;addBuffer();S.order=[...D.players].sort(()=>Math.random()-0.5);S.idx=0;log(`PHASE ${S.phase} START · ORDER ${S.order.join(' → ')}`);render();next()}
+function removePlayer(p){D.lines.forEach(l=>{const b=line(l.id).buffer;for(let i=0;i<b.length;i++)if(b[i]===p)b[i]=null})}
+function choose(p,id){if(!S.running||S.resolving)return false;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return false;const target=line(l.id).buffer;if(target.includes(p))return true;const cap=l.fixed_value*3;if(target.filter(Boolean).length>=cap){log(`${p} → ${l.name} · FULL`,'error');return false}removePlayer(p);target.push(p);log(`${p} → ${l.name}`);render();return true}
+function resolve(l){const s=line(l.id),b=s.buffer,players=[...new Set(b.filter(Boolean))];if(!players.length){let removed=0,n=[];for(const x of b){if(x===null&&removed<l.fixed_value)removed++;else n.push(x)}s.buffer=n;return []}
+ const front=new Set(b.slice(0,l.fixed_value).filter(Boolean));if(players.length===front.size&&players.every(p=>front.has(p))){s.buffer=b.slice(l.fixed_value);return players}
+ let removed=0,n=[];for(const x of b){if(x===null&&removed<l.fixed_value)removed++;else n.push(x)}s.buffer=n;return []}
+function resolvePhase(){if(S.resolving||!S.running)return;S.resolving=true;const rewards=[];D.lines.forEach(l=>resolve(l).forEach(p=>{const s=line(l.id);if(s.rewards[p]>=l.max_rewards)return;s.rewards[p]++;S.players[p].by[l.id]=(S.players[p].by[l.id]||0)+1;rewards.push([p,l.name,s.rewards[p],scoreFor(p,l)]);log(`REWARD · ${p} · ${l.name} ×${s.rewards[p]} · SCORE ${scoreFor(p,l)}`,'reward')}));render();
+ const win=D.players.filter(p=>D.lines.every(l=>(S.players[p].by[l.id]||0)>=3));if(win.length)return end(win.join(', ')+' WIN');
+ const exhausted=D.lines.every(l=>D.players.reduce((n,p)=>n+S.lines[l.id].rewards[p],0)>=l.max_rewards);if(exhausted)return end('ALL REWARDS EXHAUSTED');
+ if(S.phase>=D.max_phases)return end(`${D.max_phases} PHASES REACHED`);
+ S.phase++;startPhase()}
+function aiScore(p,l){const s=line(l.id),b=s.buffer,c=S.players[p].by[l.id]||0,r=scoreRows(l.id),nextScore=r[Math.min(c,4)]||0,front=b.slice(0,l.fixed_value),occ=new Set(b.filter(Boolean)),inFront=front.includes(p),empty=b.filter(x=>x===null).length;return nextScore*2+(inFront?14:0)+Math.min(empty,3)-occ.size*1.5+Math.random()*5}
+function ai(p){if(!S.running||S.resolving||S.order[S.idx]!==p)return;const opts=D.lines.map(l=>[l,aiScore(p,l)]).sort((a,b)=>b[1]-a[1]);const top=opts.slice(0,Math.min(3,opts.length)),pick=top[Math.floor(Math.random()*top.length)][0];choose(p,pick.id);S.idx++;next()}
+function next(){if(!S.running||S.resolving)return;if(S.idx>=S.order.length){resolvePhase();return}const p=S.order[S.idx];render();if(p==='Human')return;clearTimeout(timer);timer=setTimeout(()=>ai(p),420)}
+function human(id){if(!S.running||S.resolving||S.order[S.idx]!=='Human')return;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return;const s=line(l.id);const same=s.buffer.includes('Human');const cap=l.fixed_value*3;if(!same&&s.buffer.length>=cap){log(`Human → ${l.name} · FULL`,'error');return}if(String(pendingLine)===String(id)){pendingLine=null;if(same){log('Human · WAIT');S.idx++;next()}else if(choose('Human',id)){S.idx++;next()}}else{pendingLine=id;render()}}
+function wait(){if(S.running&&!S.resolving&&S.order[S.idx]==='Human'){pendingLine=null;log('Human · WAIT');S.idx++;next()}}
+document.querySelector('#wait').addEventListener('click',wait);document.querySelector('#new').addEventListener('click',resetState);document.querySelector('#modalNew').addEventListener('click',resetState);
+function render(){
+ if(!D||!S)return;
+ document.querySelector('#phase').textContent=S.phase;
+ const p=S.order[S.idx];
+ document.querySelector('.turn-msg').innerHTML=p?`TURN · <span class="turn">${esc(p)}</span>`:'RESOLVING';
+ document.querySelector('#status').textContent=S.running?(p==='Human'?(pendingLine!==null?'한 번 더 누르면 확정됩니다.':'라인을 선택하면 마지막 위치가 미리 표시됩니다.'):'AI가 선택 중입니다.'):'GAME OVER';
+ document.querySelector('#wait').disabled=!(S.running&&!S.resolving&&p==='Human');
+ const L=document.querySelector('#lines'); L.innerHTML='';
+ D.lines.forEach(l=>{
+   const s=line(l.id),cap=l.fixed_value*3,slots=Math.max(21,cap);
+   let q='';
+   for(let i=0;i<slots;i++){
+     const row=Math.floor(i/3),pos=i%3,col=(row%2===0)?pos:(2-pos);
+     const x=s.buffer[i]||null;
+     const preview=!x&&String(pendingLine)===String(l.id)&&p==='Human'&&i===s.buffer.length;
+     const state=x?'filled '+cls(x):(preview?'preview':'inactive');
+     const pathStart=((row%2===0&&pos===0)||(row%2===1&&pos===2));
+     const pathEnd=((row%2===0&&pos===2)||(row%2===1&&pos===0));
+     const activePath=i<s.buffer.length||preview;
+     const pathClass=(i<Math.max(21,cap)?'path-cell ':'')+(pathStart?'path-start ':'')+(pathEnd?'turn-end':'');
+     const cc=activePath?(lineColors[l.name]||'#888'):'#cfd4d9';
+     q+=`<div class="slot ${pathClass}${state}" style="grid-row:${row+1};grid-column:${col+1};--pc:${x?(playerColors[x]||'#607080'):(preview?playerColors.Human:'transparent')};--lc:${lineColors[l.name]||'#888'};--cc:${cc}">${x?esc(x==='Human'?'H':x.replace('AI ','A')):preview?'H':''}</div>`;
+   }
+   const isHumanTurn=p==='Human'&&!S.resolving&&S.running;
+   const full=s.buffer.length>=cap;
+   const can=isHumanTurn&&(s.buffer.includes('Human')||!full);
+   const pending=String(pendingLine)===String(l.id)&&isHumanTurn;
+   const buttonLabel=pending?'CONFIRM '+l.name:'LINE '+l.name;
+   L.insertAdjacentHTML('beforeend',`<div class="line-wrap">
+     <div class="line" style="--lc:${lineColors[l.name]||'#888'}">
+       <div class="lhead"><div class="lname">${esc(l.name)}</div><div class="stat">FV <b>${l.fixed_value}</b></div><div class="stat">Reward <b>${Math.max(...D.players.map(x=>s.rewards[x]||0))}/${l.max_rewards}</b></div></div>
+       <div class="queue">${q}</div>
+     </div>
+     <button class="line-action ${pending?'active':''}" style="--lc:${lineColors[l.name]||'#888'}" data-line="${esc(l.id)}" ${can?'':'disabled'}>${buttonLabel}</button>
+   </div>`);
+ });
+ document.querySelectorAll('.line-action').forEach(btn=>btn.addEventListener('click',()=>human(btn.dataset.line)));
+ document.querySelector('#actions').innerHTML='';
+ document.querySelector('#players').innerHTML=D.players.map(x=>{
+   const pc=playerColors[x]||'#607080';
+   const rows=D.lines.map(l=>{const c=S.players[x].by[l.id]||0,r=scoreRows(l.id);return `<tr><td class="score-line" style="color:${lineColors[l.name]||'#555'}">${esc(l.name)}</td>${r.map((z,i)=>`<td class="${c===i+1||c>5&&i===4?'hit':''}">${z}</td>`).join('')}<td>${c}</td></tr>`}).join('');
+   return `<div class="player ${x===p?'current':''}" style="--pc:${pc}"><div class="phead"><span>${esc(x)}</span><span class="total">${total(x)}</span></div><table><tr><th>LINE</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5+</th><th>R</th></tr>${rows}</table></div>`
+ }).join('');
+}
+function end(x){S.running=false;S.resolving=false;render();document.querySelector('#modalText').textContent=x;document.querySelector('#modal').style.display='flex'}
+async function boot(){try{const r=await fetch('./data/gameData.json',{cache:'no-store'});if(!r.ok)throw new Error(`data/gameData.json HTTP ${r.status}`);D=await r.json();if(!D.lines||!D.players)throw new Error('gameData.json 형식이 올바르지 않습니다.');resetState()}catch(e){console.error(e);document.querySelector('#turn').textContent='GAME DATA LOAD ERROR';document.querySelector('#status').textContent=e.message;log(`ERROR · ${e.message}`,'error')}}
+boot();
+</script>
+</body></html>
