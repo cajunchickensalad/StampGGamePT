@@ -9,10 +9,10 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif}button{font:inherit}
 #app{--line-width:68px;width:min(390px,100%);min-height:100dvh;margin:auto;display:flex;flex-direction:column}
 header{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:var(--panel);border-bottom:1px solid var(--border)}
-.logo{font-size:15px;font-weight:800;letter-spacing:.08em}.meta{font-size:11px;color:var(--muted)}.meta b{color:var(--text)}
+.logo{font-size:15px;font-weight:800;letter-spacing:.08em}.meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px}.speed{display:flex;gap:2px}.speed button{height:22px;min-width:24px;padding:0 4px;border:1px solid var(--border);border-radius:4px;background:#fff;color:var(--muted);font-size:9px;font-weight:800;cursor:pointer}.speed button.active{background:#eef3f8;color:var(--accent);border-color:var(--accent)}.meta b{color:var(--text)}
 main{flex:1;overflow:auto;padding:7px}.box{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;box-shadow:0 1px 2px #00000008}.title{height:30px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--muted)}
 #lines{display:flex;gap:6px;overflow-x:auto;padding:6px;overflow-y:hidden;scrollbar-width:thin}.line-wrap{flex:0 0 var(--line-width);width:var(--line-width);display:flex;flex-direction:column;gap:4px}.line{width:var(--line-width);background:var(--panel2);border:1px solid var(--lc);border-radius:8px;overflow:hidden}.lhead{padding:6px 7px;border-bottom:1px solid var(--border);border-top:4px solid var(--lc)}.lname{font-size:20px;line-height:20px;font-weight:850;color:var(--lc)}.stat{font-size:10px;color:var(--muted);line-height:1.25}.stat b{color:var(--text)}
-.queue{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(7,1fr);gap:2px;min-height:168px;position:relative;overflow:visible}.slot{width:100%;aspect-ratio:1;border:1px solid var(--lc);border-radius:3px;display:flex;align-items:center;justify-content:center;background:#fff;color:#a5adb5;font-size:8px;font-weight:750;min-width:0;position:relative}.slot.path-cell:not(.path-start)::before{content:"";position:absolute;left:-3px;top:50%;width:3px;height:1px;background:var(--cc);transform:translateY(-50%)}.slot.turn-end::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:4px;background:var(--cc);transform:translateX(-50%);z-index:2}.slot.active-empty{background:#fff;border-color:var(--lc);color:transparent}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#cfd4d9!important;background:#eef0f2!important;color:#b8bec4!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}
+.queue{padding:6px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(7,1fr);gap:2px;min-height:168px;position:relative;overflow:visible}.slot{width:100%;aspect-ratio:1;border:1px solid var(--lc);border-radius:3px;display:flex;align-items:center;justify-content:center;background:#fff;color:#a5adb5;font-size:8px;font-weight:750;min-width:0;position:relative}.slot.link-next::before{content:"";position:absolute;top:50%;height:1px;background:var(--cc);transform:translateY(-50%);z-index:1}.slot.link-right::before{left:100%;width:4px}.slot.link-left::before{right:100%;width:4px}.slot.turn-down::after{content:"";position:absolute;top:100%;height:4px;width:1px;background:var(--cc);transform:translateX(-50%);z-index:2}.slot.turn-right::after{left:100%}.slot.turn-left::after{left:0}.slot.active-empty{background:#fff;border-color:var(--lc);color:transparent}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#cfd4d9!important;background:#eef0f2!important;color:#b8bec4!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}.slot.active-empty{background:#fff;border-color:var(--lc);color:transparent}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#cfd4d9!important;background:#eef0f2!important;color:#b8bec4!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}
 #turn{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 8px 4px;font-size:12px;font-weight:650}.turn-msg{flex:1;text-align:center}.turn-wait{height:30px;min-width:58px;padding:0 8px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);font-size:10px;font-weight:750;cursor:pointer}.turn-wait:disabled{opacity:.35;cursor:not-allowed}.turn{font-weight:800;color:var(--accent)}.status{font-size:10px;color:var(--muted);text-align:center;padding:6px 8px;border-top:1px solid var(--border);background:var(--panel2)}
 .line-action{height:36px;width:var(--line-width);border:1px solid var(--lc);border-radius:7px;background:#fff;color:var(--text);font-size:11px;font-weight:750;cursor:pointer}.line-action:hover:not(:disabled){border-color:var(--lc);background:color-mix(in srgb,var(--lc) 9%,#fff)}.line-action:disabled{opacity:.35;cursor:not-allowed}.line-action.active{box-shadow:0 0 0 2px color-mix(in srgb,var(--lc) 20%,transparent)}button:disabled{opacity:.35;cursor:not-allowed}
 #players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px;overflow:hidden}.player{background:var(--panel2);border:1px solid var(--pc);border-top:3px solid var(--pc);border-radius:8px;padding:6px}.player.current{box-shadow:0 0 0 2px color-mix(in srgb,var(--pc) 25%,transparent)}.phead{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800;color:var(--pc)}.total{font-size:16px;color:var(--text)}
@@ -25,7 +25,7 @@ table{border-collapse:collapse;margin-top:5px;font-size:7px;text-align:center;ta
 </head>
 <body>
 <div id="app">
-<header><div class="logo">STAMP GAME</div><div class="meta">ROUND <b>1</b> · PHASE <b id="phase">-</b>/30</div></header>
+<header><div class="logo">STAMP GAME</div><div class="meta"><div class="speed" aria-label="AI speed"><button data-speed="1">X1</button><button data-speed="2">X2</button><button data-speed="4" class="active">X4</button></div><span>R1 · P<b id="phase">-</b>/30</span></div></header>
 <main>
 <section class="box"><div class="title"><span>LINES</span><span>PHASE START</span></div><div id="lines"></div><div id="turn"><span class="turn-msg"></span><button id="wait" class="turn-wait" disabled>WAIT</button></div><div id="actions"></div><div id="status" class="status"></div></section>
 <section class="box"><div class="title"><span>PLAYER SCOREBOARD</span><span>INDIVIDUAL</span></div><div id="players"></div></section>
@@ -36,7 +36,8 @@ table{border-collapse:collapse;margin-top:5px;font-size:7px;text-align:center;ta
 <div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalNew">NEW GAME</button></div></div>
 <script>
 'use strict';
-let D=null,S=null,timer=null,pendingLine=null;
+let D=null,S=null,timer=null,pendingLine=null,gameSpeed=4;
+const AI_DELAYS={1:1680,2:840,4:420};
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cls=p=>p==='Human'?'H':p==='AI 1'?'A1':p==='AI 2'?'A2':'A3';
 const lineColors={A:'#DAA520',B:'#C75BAD',C:'#5BA8C7',D:'#7DBF5E',E:'#C7875B'};
@@ -54,7 +55,7 @@ function addBuffer(){const mp={};for(const r of D.line_phase_map||[]){if(+r.phas
 }
 function startPhase(){if(!S.running)return;S.resolving=false;addBuffer();S.order=[...D.players].sort(()=>Math.random()-0.5);S.idx=0;log(`PHASE ${S.phase} START · ORDER ${S.order.join(' → ')}`);render();next()}
 function removePlayer(p){D.lines.forEach(l=>{const b=line(l.id).buffer;for(let i=0;i<b.length;i++)if(b[i]===p)b[i]=null})}
-function choose(p,id){if(!S.running||S.resolving)return false;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return false;const target=line(l.id).buffer;if(target.includes(p))return true;const cap=l.fixed_value*3;if(target.filter(Boolean).length>=cap){log(`${p} → ${l.name} · FULL`,'error');return false}removePlayer(p);target.push(p);log(`${p} → ${l.name}`);render();return true}
+function choose(p,id){if(!S.running||S.resolving)return false;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return false;const target=line(l.id).buffer;if(target.includes(p))return true;const cap=l.fixed_value*3;if(target.length>=cap){log(`${p} → ${l.name} · FULL`,'error');return false}removePlayer(p);target.push(p);log(`${p} → ${l.name}`);render();return true}
 function resolve(l){const s=line(l.id),b=s.buffer,players=[...new Set(b.filter(Boolean))];if(!players.length){let removed=0,n=[];for(const x of b){if(x===null&&removed<l.fixed_value)removed++;else n.push(x)}s.buffer=n;return []}
  const front=new Set(b.slice(0,l.fixed_value).filter(Boolean));if(players.length===front.size&&players.every(p=>front.has(p))){s.buffer=b.slice(l.fixed_value);return players}
  let removed=0,n=[];for(const x of b){if(x===null&&removed<l.fixed_value)removed++;else n.push(x)}s.buffer=n;return []}
@@ -65,10 +66,10 @@ function resolvePhase(){if(S.resolving||!S.running)return;S.resolving=true;const
  S.phase++;startPhase()}
 function aiScore(p,l){const s=line(l.id),b=s.buffer,c=S.players[p].by[l.id]||0,r=scoreRows(l.id),nextScore=r[Math.min(c,4)]||0,front=b.slice(0,l.fixed_value),occ=new Set(b.filter(Boolean)),inFront=front.includes(p),empty=b.filter(x=>x===null).length;return nextScore*2+(inFront?14:0)+Math.min(empty,3)-occ.size*1.5+Math.random()*5}
 function ai(p){if(!S.running||S.resolving||S.order[S.idx]!==p)return;const opts=D.lines.map(l=>[l,aiScore(p,l)]).sort((a,b)=>b[1]-a[1]);const top=opts.slice(0,Math.min(3,opts.length)),pick=top[Math.floor(Math.random()*top.length)][0];choose(p,pick.id);S.idx++;next()}
-function next(){if(!S.running||S.resolving)return;if(S.idx>=S.order.length){resolvePhase();return}const p=S.order[S.idx];render();if(p==='Human')return;clearTimeout(timer);timer=setTimeout(()=>ai(p),420)}
+function next(){if(!S.running||S.resolving)return;if(S.idx>=S.order.length){resolvePhase();return}const p=S.order[S.idx];render();if(p==='Human')return;clearTimeout(timer);timer=setTimeout(()=>ai(p),AI_DELAYS[gameSpeed])}
 function human(id){if(!S.running||S.resolving||S.order[S.idx]!=='Human')return;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return;const s=line(l.id);const same=s.buffer.includes('Human');const cap=l.fixed_value*3;if(!same&&s.buffer.length>=cap){log(`Human → ${l.name} · FULL`,'error');return}if(String(pendingLine)===String(id)){pendingLine=null;if(same){log('Human · WAIT');S.idx++;next()}else if(choose('Human',id)){S.idx++;next()}}else{pendingLine=id;render()}}
 function wait(){if(S.running&&!S.resolving&&S.order[S.idx]==='Human'){pendingLine=null;log('Human · WAIT');S.idx++;next()}}
-document.querySelector('#wait').addEventListener('click',wait);document.querySelector('#new').addEventListener('click',resetState);document.querySelector('#modalNew').addEventListener('click',resetState);
+document.querySelector('#wait').addEventListener('click',wait);document.querySelector('#new').addEventListener('click',resetState);document.querySelector('#modalNew').addEventListener('click',resetState);document.querySelectorAll('.speed button').forEach(btn=>btn.addEventListener('click',()=>{gameSpeed=+btn.dataset.speed;document.querySelectorAll('.speed button').forEach(b=>b.classList.toggle('active',b===btn));}));
 function render(){
  if(!D||!S)return;
  document.querySelector('#phase').textContent=S.phase;
@@ -83,12 +84,18 @@ function render(){
    for(let i=0;i<slots;i++){
      const row=Math.floor(i/3),pos=i%3,col=(row%2===0)?pos:(2-pos);
      const x=s.buffer[i]||null;
-     const preview=!x&&String(pendingLine)===String(l.id)&&p==='Human'&&i===s.buffer.length;
+     const preview=!x&&!s.buffer.includes('Human')&&String(pendingLine)===String(l.id)&&p==='Human'&&i===s.buffer.length;
      const state=x?'filled '+cls(x):(preview?'preview':'inactive');
      const pathStart=((row%2===0&&pos===0)||(row%2===1&&pos===2));
      const pathEnd=((row%2===0&&pos===2)||(row%2===1&&pos===0));
      const activePath=i<s.buffer.length||preview;
-     const pathClass=(i<Math.max(21,cap)?'path-cell ':'')+(pathStart?'path-start ':'')+(pathEnd?'turn-end':'');
+     const nextIsReal=i+1<s.buffer.length|| (i+1===s.buffer.length&&preview);
+     let pathClass='';
+     if(i<Math.max(21,cap)){
+       if(!pathEnd&&nextIsReal) pathClass += (row%2===0?'link-right ':'link-left ');
+       if(pathEnd&&row+1<Math.ceil(slots/3)) pathClass += (row%2===0?'turn-right ':'turn-left ');
+       if(pathEnd) pathClass += 'turn-down ';
+     }
      const cc=activePath?(lineColors[l.name]||'#888'):'#cfd4d9';
      q+=`<div class="slot ${pathClass}${state}" style="grid-row:${row+1};grid-column:${col+1};--pc:${x?(playerColors[x]||'#607080'):(preview?playerColors.Human:'transparent')};--lc:${lineColors[l.name]||'#888'};--cc:${cc}">${x?esc(x==='Human'?'H':x.replace('AI ','A')):preview?'H':''}</div>`;
    }
