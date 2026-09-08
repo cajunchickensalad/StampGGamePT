@@ -1,0 +1,888 @@
+{
+  "max_phases": 30,
+  "players": [
+    "Human",
+    "AI 1",
+    "AI 2",
+    "AI 3"
+  ],
+  "lines": [
+    {
+      "id": 1,
+      "name": "A",
+      "fixed_value": 4,
+      "max_rewards": 8
+    },
+    {
+      "id": 2,
+      "name": "B",
+      "fixed_value": 3,
+      "max_rewards": 6
+    },
+    {
+      "id": 3,
+      "name": "C",
+      "fixed_value": 4,
+      "max_rewards": 8
+    },
+    {
+      "id": 4,
+      "name": "D",
+      "fixed_value": 3,
+      "max_rewards": 6
+    },
+    {
+      "id": 5,
+      "name": "E",
+      "fixed_value": 2,
+      "max_rewards": 5
+    }
+  ],
+  "score_table": [
+    {
+      "line_pool_id": 1,
+      "tier1": 0,
+      "tier2": 0,
+      "tier3": 10,
+      "tier4": 20,
+      "tier5": 30
+    },
+    {
+      "line_pool_id": 2,
+      "tier1": 0,
+      "tier2": 0,
+      "tier3": 10,
+      "tier4": 15,
+      "tier5": 25
+    },
+    {
+      "line_pool_id": 3,
+      "tier1": 0,
+      "tier2": 0,
+      "tier3": 5,
+      "tier4": 10,
+      "tier5": 20
+    },
+    {
+      "line_pool_id": 4,
+      "tier1": 0,
+      "tier2": 0,
+      "tier3": 5,
+      "tier4": 10,
+      "tier5": 15
+    },
+    {
+      "line_pool_id": 5,
+      "tier1": 0,
+      "tier2": 0,
+      "tier3": 5,
+      "tier4": 10,
+      "tier5": 15
+    }
+  ],
+  "buffer_types": [
+    {
+      "id": 1,
+      "name": "Weak",
+      "probabilities": {
+        "0": 1.5,
+        "1": 31.25,
+        "2": 34.75,
+        "3": 31.0,
+        "4": 1.0,
+        "5": 0.5,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0
+      }
+    },
+    {
+      "id": 2,
+      "name": "Normal",
+      "probabilities": {
+        "0": 1.0,
+        "1": 5.0,
+        "2": 15.0,
+        "3": 25.0,
+        "4": 25.0,
+        "5": 15.0,
+        "6": 8.0,
+        "7": 4.0,
+        "8": 1.5,
+        "9": 0.5,
+        "10": 0
+      }
+    },
+    {
+      "id": 3,
+      "name": "Strong",
+      "probabilities": {
+        "0": 0,
+        "1": 0.5,
+        "2": 1.0,
+        "3": 5.0,
+        "4": 15.0,
+        "5": 25.0,
+        "6": 25.0,
+        "7": 15.0,
+        "8": 8.0,
+        "9": 4.0,
+        "10": 1.5
+      }
+    }
+  ],
+  "line_phase_map": [
+    {
+      "line_pool_id": 1,
+      "phase_number": 1,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 2,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 3,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 4,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 5,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 6,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 7,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 8,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 9,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 10,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 11,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 12,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 13,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 14,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 15,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 16,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 17,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 18,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 19,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 20,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 21,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 22,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 23,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 24,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 25,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 26,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 27,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 28,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 29,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 1,
+      "phase_number": 30,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 1,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 2,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 3,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 4,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 5,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 6,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 7,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 8,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 9,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 10,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 11,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 12,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 13,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 14,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 15,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 16,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 17,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 18,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 19,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 20,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 21,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 22,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 23,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 24,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 25,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 26,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 27,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 28,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 29,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 2,
+      "phase_number": 30,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 1,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 2,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 3,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 4,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 5,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 6,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 7,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 8,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 9,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 10,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 11,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 12,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 13,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 14,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 15,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 16,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 17,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 18,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 19,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 20,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 21,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 22,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 23,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 24,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 25,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 26,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 27,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 28,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 29,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 3,
+      "phase_number": 30,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 1,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 2,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 3,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 4,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 5,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 6,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 7,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 8,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 9,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 10,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 11,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 12,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 13,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 14,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 15,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 16,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 17,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 18,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 19,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 20,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 21,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 22,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 23,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 24,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 25,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 26,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 27,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 28,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 29,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 4,
+      "phase_number": 30,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 1,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 2,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 3,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 4,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 5,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 6,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 7,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 8,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 9,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 10,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 11,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 12,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 13,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 14,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 15,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 16,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 17,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 18,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 19,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 20,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 21,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 22,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 23,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 24,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 25,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 26,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 27,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 28,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 29,
+      "buffer_type_id": 2
+    },
+    {
+      "line_pool_id": 5,
+      "phase_number": 30,
+      "buffer_type_id": 2
+    }
+  ]
+}
