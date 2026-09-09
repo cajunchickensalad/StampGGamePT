@@ -131,758 +131,809 @@
         "9": 4.0,
         "10": 1.5
       }
+    },
+    {
+      "id": 4,
+      "name": "Line A/C",
+      "probabilities": {
+        "0": 1,
+        "1": 4,
+        "2": 13,
+        "3": 24,
+        "4": 28,
+        "5": 17,
+        "6": 7,
+        "7": 4,
+        "8": 2,
+        "9": 0,
+        "10": 0
+      }
+    },
+    {
+      "id": 5,
+      "name": "Line B/D",
+      "probabilities": {
+        "0": 2,
+        "1": 10,
+        "2": 25,
+        "3": 30,
+        "4": 20,
+        "5": 8,
+        "6": 3,
+        "7": 1,
+        "8": 1,
+        "9": 0,
+        "10": 0
+      }
+    },
+    {
+      "id": 6,
+      "name": "Line E",
+      "probabilities": {
+        "0": 5,
+        "1": 20,
+        "2": 35,
+        "3": 25,
+        "4": 10,
+        "5": 4,
+        "6": 1,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0
+      }
     }
   ],
   "line_phase_map": [
     {
       "line_pool_id": 1,
       "phase_number": 1,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 2,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 3,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 4,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 5,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 6,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 7,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 8,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 9,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 10,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 11,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 12,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 13,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 14,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 15,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 16,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 17,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 18,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 19,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 20,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 21,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 22,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 23,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 24,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 25,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 26,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 27,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 28,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 29,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 1,
       "phase_number": 30,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 2,
       "phase_number": 1,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 2,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 3,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 4,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 5,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 6,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 7,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 8,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 9,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 10,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 11,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 12,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 13,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 14,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 15,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 16,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 17,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 18,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 19,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 20,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 21,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 22,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 23,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 24,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 25,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 26,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 27,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 28,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 29,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 2,
       "phase_number": 30,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 3,
       "phase_number": 1,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 2,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 3,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 4,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 5,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 6,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 7,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 8,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 9,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 10,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 11,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 12,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 13,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 14,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 15,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 16,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 17,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 18,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 19,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 20,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 21,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 22,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 23,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 24,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 25,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 26,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 27,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 28,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 29,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 3,
       "phase_number": 30,
-      "buffer_type_id": 2
+      "buffer_type_id": 4
     },
     {
       "line_pool_id": 4,
       "phase_number": 1,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 2,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 3,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 4,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 5,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 6,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 7,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 8,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 9,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 10,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 11,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 12,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 13,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 14,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 15,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 16,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 17,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 18,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 19,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 20,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 21,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 22,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 23,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 24,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 25,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 26,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 27,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 28,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 29,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 4,
       "phase_number": 30,
-      "buffer_type_id": 2
+      "buffer_type_id": 5
     },
     {
       "line_pool_id": 5,
       "phase_number": 1,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 2,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 3,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 4,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 5,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 6,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 7,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 8,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 9,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 10,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 11,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 12,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 13,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 14,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 15,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 16,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 17,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 18,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 19,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 20,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 21,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 22,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 23,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 24,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 25,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 26,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 27,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 28,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 29,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     },
     {
       "line_pool_id": 5,
       "phase_number": 30,
-      "buffer_type_id": 2
+      "buffer_type_id": 6
     }
   ]
 }
