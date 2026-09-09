@@ -65,43 +65,65 @@ function resolvePhase(){if(S.resolving||!S.running)return;S.resolving=true;const
  const exhausted=D.lines.every(l=>D.players.reduce((n,p)=>n+S.lines[l.id].rewards[p],0)>=l.max_rewards);if(exhausted)return end('ALL REWARDS EXHAUSTED');
  if(S.phase>=D.max_phases)return end(`${D.max_phases} PHASES REACHED`);
  S.phase++;startPhase()}
-function simulateLine(lid,incomingPlayer){
- const l=D.lines.find(x=>String(x.id)===String(lid)),s0=line(lid),b=s0.buffer.slice();
- if(!b.includes(incomingPlayer)){if(b.length>=MAX_QUEUE)return null;b.push(incomingPlayer);}
+function simulateLine(lid,p){
+ const l=D.lines.find(x=>String(x.id)===String(lid));
+ if(!l)return null;
+ const b=line(lid).buffer.slice();
+ const already=b.includes(p);
+ if(!already){
+   if(b.length>=MAX_QUEUE)return null;
+   b.push(p);
+ }
+ const pos=b.indexOf(p);
+ const fv=l.fixed_value;
+ const emptyBefore=b.slice(0,pos).filter(x=>x===null).length;
  const players=[...new Set(b.filter(Boolean))];
- if(!players.length)return {reward:false,empty:b.filter(x=>x===null).length,players:0,pos:-1,front:0};
- const front=new Set(b.slice(0,l.fixed_value).filter(Boolean));
- const reward=players.length===front.size&&players.every(x=>front.has(x));
- return {reward,front:front.size,players:players.length,empty:b.filter(x=>x===null).length,pos:b.indexOf(incomingPlayer)};
+ const frontPlayers=[...new Set(b.slice(0,fv).filter(Boolean))];
+ const reward=players.length>0&&players.length===frontPlayers.length&&players.every(x=>frontPlayers.includes(x));
+ const emptyCount=b.filter(x=>x===null).length;
+ const removedBefore=Math.min(fv,emptyBefore);
+ const projectedPos=pos<0?-1:pos-removedBefore;
+ const outsidePlayers=players.filter(x=>b.indexOf(x)>=fv).length;
+ return {
+   reward,
+   pos,
+   projectedPos,
+   inFront:pos>=0&&pos<fv,
+   emptyBefore,
+   emptyCount,
+   players:players.length,
+   outsidePlayers,
+   frontPlayers:frontPlayers.length,
+   fv,
+   nextScore:scoreRows(l.id)[Math.min(S.players[p].by[l.id]||0,4)]||0
+ };
 }
-function aiScore(p,l,action){
- const current=line(l.id).buffer,already=current.includes(p);
- if(action==='STAY'&&!already)return -Infinity;
- if(action==='MOVE'&&already)return -Infinity;
+function aiCandidate(p,l){
+ const current=line(l.id).buffer;
+ const already=current.includes(p);
+ const action=already?'STAY':'MOVE';
  const sim=simulateLine(l.id,p);
- if(!sim)return -Infinity;
- const c=S.players[p].by[l.id]||0,r=scoreRows(l.id),nextScore=r[Math.min(c,4)]||0;
- let score=nextScore;
- if(sim.reward)score+=150;
- if(sim.pos>=0&&sim.pos<l.fixed_value)score+=35;
- if(sim.front===l.fixed_value)score+=15;
- score+=Math.min(sim.empty,3);
- if(action==='STAY')score+=10;
- // When the current line is not immediately rewarding, a MOVE to another line gets a small priority.
- if(action==='MOVE'&&already===false)score+=2;
- return score;
+ if(!sim)return null;
+ // Priority weights: immediate self-reward > FV position > post-fail position > score value.
+ // No fixed STAY/MOVE bonus and no large Line-specific reward bonus.
+ let score=0;
+ if(sim.reward)score+=10000;
+ if(sim.inFront)score+=1800+(sim.fv-sim.pos)*180;
+ score+=Math.max(0,420-Math.max(0,sim.projectedPos)*35);
+ score+=Math.min(sim.emptyBefore,sim.fv)*35;
+ score-=sim.outsidePlayers*90;
+ score+=sim.nextScore*12;
+ if(sim.players>sim.fv)score-=Math.max(0,sim.players-sim.fv)*18;
+ return {l,action,score,sim};
 }
 function ai(p){
  if(!S.running||S.resolving||S.order[S.idx]!==p)return;
- const opts=[];
- D.lines.forEach(l=>{
-   const current=line(l.id).buffer;
-   if(current.includes(p)) opts.push({l,action:'STAY',score:aiScore(p,l,'STAY')});
-   else opts.push({l,action:'MOVE',score:aiScore(p,l,'MOVE')});
- });
+ const opts=D.lines.map(l=>aiCandidate(p,l)).filter(Boolean);
  opts.sort((a,b)=>b.score-a.score);
- const best=opts[0]?.score??-Infinity;
- const top=opts.filter(x=>best-x.score<=3);
+ if(!opts.length){S.idx++;next();return}
+ const best=opts[0].score;
+ // Small randomness only among genuinely near-equivalent choices.
+ const top=opts.filter(x=>best-x.score<=12);
  const pick=top[Math.floor(Math.random()*top.length)];
  if(pick.action==='STAY')log(`${p} · STAY · ${pick.l.name}`);
  else choose(p,pick.l.id);
