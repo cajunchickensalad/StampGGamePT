@@ -7,20 +7,21 @@
 <style>
 :root{--bg:#f3f5f7;--panel:#fff;--panel2:#f8fafb;--border:#d8dee5;--text:#27313a;--muted:#77818b;--accent:#4169a1;--good:#3b8b68;--danger:#c45b5b}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif}button{font:inherit}
-#app{width:min(476px,100%);min-height:100dvh;margin:auto;display:flex;flex-direction:column}
+#app{--line-width:88px;width:min(476px,100%);min-height:100dvh;margin:auto;display:flex;flex-direction:column}
 header{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:var(--panel);border-bottom:1px solid var(--border)}
 .logo{font-size:15px;font-weight:800;letter-spacing:.08em}.meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px}.speed{display:flex;gap:2px}.speed button{height:22px;min-width:24px;padding:0 4px;border:1px solid var(--border);border-radius:4px;background:#fff;color:var(--muted);font-size:9px;font-weight:800;cursor:pointer}.speed button.active{background:#eef3f8;color:var(--accent);border-color:var(--accent)}.meta b{color:var(--text)}.top-new{height:24px;padding:0 7px;border:1px solid var(--border);border-radius:5px;background:#fff;color:var(--muted);font-size:9px;font-weight:800;cursor:pointer}.top-new:hover{border-color:var(--accent);color:var(--accent)}
 main{flex:1;overflow:auto;padding:7px}.box{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;box-shadow:0 1px 2px #00000008}.title{height:30px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--muted)}
-#lines{display:flex;gap:5px;overflow:hidden;padding:6px;overflow-y:hidden}.line-wrap{flex:1 1 0;width:0;min-width:0;display:flex;flex-direction:column;gap:4px}.line{width:100%;background:var(--panel2);border:1px solid var(--lc);border-radius:8px;overflow:hidden}.lhead{padding:6px 7px;border-bottom:1px solid var(--border);border-top:4px solid var(--lc)}.lname{font-size:20px;line-height:20px;font-weight:850;color:var(--lc)}.stat{font-size:10px;color:var(--muted);line-height:1.25}.stat b{color:var(--text)}
-.queue{padding:6px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:18px;gap:1px;position:relative;overflow:visible}.slot{width:18px;height:18px;border:1px solid var(--lc);border-radius:3px;display:flex;align-items:center;justify-content:center;background:#fff;color:#9aa3ab;font-size:7px;font-weight:750;min-width:0;position:relative;z-index:2}.slot.active-empty{background:color-mix(in srgb,var(--lc) 24%,#fff);border-color:var(--lc);color:#8e969d}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#d5d9dd!important;background:#f0f2f4!important;color:#aeb5bb!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}.snake-link{height:1px;align-self:start;background:#b9bec3;z-index:1;margin-top:-1px}
+#lines{display:grid;grid-template-columns:repeat(5,var(--line-width));gap:6px;overflow:hidden;padding:6px}.line-wrap{width:var(--line-width);display:flex;flex-direction:column;gap:4px}.line{width:var(--line-width);height:320px;background:var(--panel2);border:1px solid var(--lc);border-radius:8px;overflow:hidden}.lhead{padding:6px 7px;border-bottom:1px solid var(--border);border-top:4px solid var(--lc)}.lname{font-size:20px;line-height:20px;font-weight:850;color:var(--lc)}.stat{font-size:10px;color:var(--muted);line-height:1.25}.stat b{color:var(--text)}
+.queue{padding:6px 5px;display:grid;grid-template-columns:repeat(4,18px);grid-auto-rows:18px;row-gap:3px;column-gap:2px;position:relative;overflow:visible;align-content:start}.slot{width:18px;height:18px;border:1px solid var(--lc);border-radius:3px;display:flex;align-items:center;justify-content:center;background:#fff;color:#a5adb5;font-size:8px;font-weight:750;min-width:0;position:relative}.slot.active-empty{background:color-mix(in srgb,var(--lc) 24%,#fff);border-color:var(--lc);color:transparent}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#cfd4d9!important;background:#eef0f2!important;color:#b8bec4!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}.snake-x{height:1px;align-self:end;background:var(--lc);border-radius:0;opacity:.6;pointer-events:none}.snake-x.left{grid-column:2 / span 3}.snake-x.right{grid-column:1 / span 3}
 #turn{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 8px 4px;font-size:12px;font-weight:650}.turn-msg{flex:1;text-align:center}.turn-wait{height:30px;min-width:58px;padding:0 8px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);font-size:10px;font-weight:750;cursor:pointer}.turn-wait:disabled{opacity:.35;cursor:not-allowed}.turn{font-weight:800;color:var(--accent)}.status{font-size:10px;color:var(--muted);text-align:center;padding:6px 8px;border-top:1px solid var(--border);background:var(--panel2)}
 .line-action{height:36px;width:var(--line-width);border:1px solid var(--lc);border-radius:7px;background:#fff;color:var(--text);font-size:11px;font-weight:750;cursor:pointer}.line-action:hover:not(:disabled){border-color:var(--lc);background:color-mix(in srgb,var(--lc) 9%,#fff)}.line-action:disabled{opacity:.35;cursor:not-allowed}.line-action.active{box-shadow:0 0 0 2px color-mix(in srgb,var(--lc) 20%,transparent)}button:disabled{opacity:.35;cursor:not-allowed}
 #players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px;overflow:hidden}.player{background:var(--panel2);border:1px solid var(--pc);border-top:3px solid var(--pc);border-radius:8px;padding:6px}.player.current{box-shadow:0 0 0 2px color-mix(in srgb,var(--pc) 25%,transparent)}.phead{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800;color:var(--pc)}.total{font-size:16px;color:var(--text)}
-table{border-collapse:collapse;margin-top:5px;font-size:7px;text-align:center;table-layout:fixed;width:100%}th,td{border:1px solid var(--border);padding:0;width:18px;height:18px;min-width:18px;max-width:18px}th{color:var(--muted);font-weight:750}td.hit{background:color-mix(in srgb,var(--pc) 16%,#fff);color:var(--pc);font-weight:850}.score-line{font-weight:800}
+table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center;table-layout:fixed;width:max-content}th,td{border:1px solid var(--border);padding:0;width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}th{color:var(--muted);font-weight:750}td.hit{background:color-mix(in srgb,var(--pc) 16%,#fff);color:var(--pc);font-weight:850}.score-line{font-weight:800}
 #log{height:95px;overflow:auto;padding:6px;font-size:9px;line-height:1.45;color:var(--muted)}.reward{color:var(--good);font-weight:700}.error{color:var(--danger)}
 .bottom{height:54px;display:flex;gap:6px;padding:7px;background:var(--panel);border-top:1px solid var(--border)}.bottom button{flex:1}.primary{background:#f5f7fa!important;border-color:#aeb8c2!important}
 #modal{display:none;position:fixed;inset:0;background:#17212b66;align-items:center;justify-content:center;padding:18px}.modal{width:min(360px,100%);background:#fff;border:1px solid var(--border);padding:17px;border-radius:10px;box-shadow:0 12px 40px #0002}.modal h2{margin:0 0 8px;font-size:19px}.modal button{width:100%;margin-top:14px;height:36px;border:1px solid var(--border);border-radius:7px;background:#fff}
-@media(max-width:430px){#app{width:100%;}.line{width:100%}#lines{gap:3px;padding:6px 4px}.queue{padding:4px;grid-auto-rows:17px;gap:1px}.slot{width:17px;height:17px;font-size:6.5px}.line-action{width:100%;font-size:8px}.bottom button{min-width:0}#players{grid-template-columns:1fr}.player{min-width:0}table{font-size:7px}th,td{width:18px;height:18px;min-width:18px;max-width:18px}}</style>
+@media(max-width:430px){#app{width:100%;--line-width:calc((100vw - 24px - 24px)/5);}.line{width:var(--line-width);height:320px}.line-wrap{width:var(--line-width)}#lines{grid-template-columns:repeat(5,var(--line-width));gap:4px;padding:6px 4px}.queue{padding:6px 3px;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:1px;row-gap:3px}.slot{width:100%;height:auto;aspect-ratio:1;font-size:7px}.snake-x{height:1px}.line-action{width:var(--line-width);font-size:9px}.bottom button{min-width:0}#players{grid-template-columns:1fr}.player{min-width:0}table{font-size:7px}th,td{width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}}
+</style>
 </head>
 <body>
 <div id="app">
@@ -64,44 +65,47 @@ function resolvePhase(){if(S.resolving||!S.running)return;S.resolving=true;const
  const exhausted=D.lines.every(l=>D.players.reduce((n,p)=>n+S.lines[l.id].rewards[p],0)>=l.max_rewards);if(exhausted)return end('ALL REWARDS EXHAUSTED');
  if(S.phase>=D.max_phases)return end(`${D.max_phases} PHASES REACHED`);
  S.phase++;startPhase()}
-function simulateAiAction(p,targetId){
- const buffers={};
- D.lines.forEach(l=>buffers[l.id]=[...line(l.id).buffer]);
- const current=D.lines.find(l=>buffers[l.id].includes(p));
- if(current&&String(current.id)!==String(targetId)){buffers[current.id]=buffers[current.id].map(x=>x===p?null:x)}
- const target=D.lines.find(l=>String(l.id)===String(targetId));
- if(!target)return null;
- if(!buffers[target.id].includes(p)){if(buffers[target.id].length>=MAX_QUEUE)return null;buffers[target.id].push(p)}
- let immediateReward=false, rewardCount=0;
- D.lines.forEach(l=>{
-   const b=buffers[l.id], players=[...new Set(b.filter(Boolean))], front=new Set(b.slice(0,l.fixed_value).filter(Boolean));
-   if(players.includes(p)&&players.length===front.size&&players.every(x=>front.has(x))){immediateReward=true;rewardCount++;}
- });
- return {buffers,immediateReward,rewardCount};
+function simulateLine(lid,incomingPlayer){
+ const l=D.lines.find(x=>String(x.id)===String(lid)),s0=line(lid),b=s0.buffer.slice();
+ if(!b.includes(incomingPlayer)){if(b.length>=MAX_QUEUE)return null;b.push(incomingPlayer);}
+ const players=[...new Set(b.filter(Boolean))];
+ if(!players.length)return {reward:false,empty:b.filter(x=>x===null).length,players:0,pos:-1,front:0};
+ const front=new Set(b.slice(0,l.fixed_value).filter(Boolean));
+ const reward=players.length===front.size&&players.every(x=>front.has(x));
+ return {reward,front:front.size,players:players.length,empty:b.filter(x=>x===null).length,pos:b.indexOf(incomingPlayer)};
 }
-function aiScore(p,l){
- const sim=simulateAiAction(p,l.id);
+function aiScore(p,l,action){
+ const current=line(l.id).buffer,already=current.includes(p);
+ if(action==='STAY'&&!already)return -Infinity;
+ if(action==='MOVE'&&already)return -Infinity;
+ const sim=simulateLine(l.id,p);
  if(!sim)return -Infinity;
- const c=S.players[p].by[l.id]||0, nextScore=scoreRows(l.id)[Math.min(c,4)]||0;
- const b=sim.buffers[l.id], front=b.slice(0,l.fixed_value), inFront=front.includes(p);
- const currentLine=D.lines.find(x=>line(x.id).buffer.includes(p));
- const staying=currentLine&&String(currentLine.id)===String(l.id);
- const others=[...new Set(b.filter(Boolean))].filter(x=>x!==p);
- let score=nextScore*2 + (inFront?12:0) + Math.min(b.filter(x=>x===null).length,3);
- if(sim.immediateReward)score+=120;
- if(inFront&&others.length===0)score+=18;
- if(staying)score+=10;
- else score-=2;
+ const c=S.players[p].by[l.id]||0,r=scoreRows(l.id),nextScore=r[Math.min(c,4)]||0;
+ let score=nextScore;
+ if(sim.reward)score+=150;
+ if(sim.pos>=0&&sim.pos<l.fixed_value)score+=35;
+ if(sim.front===l.fixed_value)score+=15;
+ score+=Math.min(sim.empty,3);
+ if(action==='STAY')score+=10;
+ // When the current line is not immediately rewarding, a MOVE to another line gets a small priority.
+ if(action==='MOVE'&&already===false)score+=2;
  return score;
 }
 function ai(p){
  if(!S.running||S.resolving||S.order[S.idx]!==p)return;
- const opts=D.lines.map(l=>[l,aiScore(p,l)]).filter(x=>Number.isFinite(x[1])).sort((a,b)=>b[1]-a[1]);
- if(!opts.length){S.idx++;next();return}
- const best=opts[0][1];
- const top=opts.filter(x=>best-x[1]<=3);
- const pick=top[Math.floor(Math.random()*top.length)][0];
- choose(p,pick.id);S.idx++;next();
+ const opts=[];
+ D.lines.forEach(l=>{
+   const current=line(l.id).buffer;
+   if(current.includes(p)) opts.push({l,action:'STAY',score:aiScore(p,l,'STAY')});
+   else opts.push({l,action:'MOVE',score:aiScore(p,l,'MOVE')});
+ });
+ opts.sort((a,b)=>b.score-a.score);
+ const best=opts[0]?.score??-Infinity;
+ const top=opts.filter(x=>best-x.score<=3);
+ const pick=top[Math.floor(Math.random()*top.length)];
+ if(pick.action==='STAY')log(`${p} · STAY · ${pick.l.name}`);
+ else choose(p,pick.l.id);
+ S.idx++;next();
 }
 function next(){if(!S.running||S.resolving)return;if(S.idx>=S.order.length){resolvePhase();return}const p=S.order[S.idx];render();if(p==='Human')return;clearTimeout(timer);timer=setTimeout(()=>ai(p),AI_DELAYS[gameSpeed])}
 function human(id){if(!S.running||S.resolving||S.order[S.idx]!=='Human')return;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return;const s=line(l.id);const same=s.buffer.includes('Human');if(String(pendingLine)===String(id)){pendingLine=null;if(same){log('Human · WAIT');S.idx++;next()}else if(choose('Human',id)){S.idx++;next()}}else{pendingLine=id;render()}}
@@ -119,28 +123,26 @@ function render(){
    const s=line(l.id),slots=21;
    let q='';
    const cc=lineColors[l.name]||'#888';
-   const fv=l.fixed_value;
-   const rowCount=Math.ceil(slots/fv);
+   // Snake path: each row contains exactly FV slots; separator only on the non-connecting side.
+   const fv=Number(l.fixed_value);
    const posOf=i=>{
-     const row=Math.floor(i/fv),within=i%fv;
-     const col=(row%2===0)?within:(fv-1-within);
-     return {row:row+1,col:col+1};
+     const row=Math.floor(i/fv);
+     const pos=i%fv;
+     const col=row%2===0?pos:fv-1-pos;
+     return {row:row*2+1,col};
    };
    for(let i=0;i<slots;i++){
      const {row,col}=posOf(i);
      const x=s.buffer[i]||null;
      const preview=!x&&!s.buffer.includes('Human')&&String(pendingLine)===String(l.id)&&p==='Human'&&i===s.buffer.length;
      const state=x?'filled '+cls(x):(preview?'preview':(i<s.buffer.length?'active-empty':'inactive'));
-     q+=`<div class="slot ${state}" style="grid-row:${row};grid-column:${col};--pc:${x?(playerColors[x]||'#607080'):(preview?playerColors.Human:'transparent')};--lc:${cc}">${x?esc(x==='Human'?'H':x.replace('AI ','A')):preview?'H':i+1}</div>`;
+     q+=`<div class="slot ${state}" style="grid-row:${row};grid-column:${col+1};--pc:${x?(playerColors[x]||'#607080'):(preview?playerColors.Human:'transparent')};--lc:${cc}">${x?esc(x==='Human'?'H':x.replace('AI ','A')):preview?'H':''}</div>`;
    }
-   // Separate only the non-continuing columns at each Snake turn.
-   // Example FV4: 4→5 stays connected; 1↕8, 2↕7, 3↕6 are separated.
-   for(let row=0;row<rowCount-1;row++){
-     const nextExists=(row+1)*fv<slots;
-     if(!nextExists) continue;
-     const clsName=(row%2===0)?'left':'right';
-     const startCol=(row%2===0)?1:2;
-     q+=`<span class="snake-link" style="grid-row:${row+2};grid-column:${startCol} / span ${fv-1};--lc:${cc}"></span>`;
+   for(let row=0;row<Math.ceil(slots/fv)-1;row++){
+     const gridRow=row*2+2;
+     const even=row%2===0;
+     // Row 0 connects at the right edge; row 1 at the left edge, alternating thereafter.
+     q+=`<div class="snake-x ${even?'right':'left'}" style="grid-row:${gridRow};--lc:${cc}"></div>`;
    }
    const isHumanTurn=p==='Human'&&!S.resolving&&S.running;
    const can=isHumanTurn;
