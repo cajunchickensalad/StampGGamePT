@@ -60,9 +60,11 @@ function choose(p,id){if(!S.running||S.resolving)return false;const l=D.lines.fi
 function resolve(l){const s=line(l.id),b=s.buffer,players=[...new Set(b.filter(Boolean))];if(!players.length){let removed=0,n=[];for(const x of b){if(x===null&&removed<l.fixed_value)removed++;else n.push(x)}s.buffer=n;return []}
  const front=new Set(b.slice(0,l.fixed_value).filter(Boolean));if(players.length===front.size&&players.every(p=>front.has(p))){s.buffer=b.slice(l.fixed_value);return players}
  let removed=0,n=[];for(const x of b){if(x===null&&removed<l.fixed_value)removed++;else n.push(x)}s.buffer=n;return []}
-function resolvePhase(){if(S.resolving||!S.running)return;S.resolving=true;const rewards=[];D.lines.forEach(l=>resolve(l).forEach(p=>{const s=line(l.id);if(s.rewards[p]>=l.max_rewards)return;s.rewards[p]++;S.players[p].by[l.id]=(S.players[p].by[l.id]||0)+1;rewards.push([p,l.name,s.rewards[p],scoreFor(p,l)]);log(`REWARD · ${p} · ${l.name} ×${s.rewards[p]} · SCORE ${scoreFor(p,l)}`,'reward')}));render();
+function lineRewardUsed(lid){const s=line(lid);return D.players.reduce((n,p)=>n+(s.rewards[p]||0),0)}
+function lineRewardRemaining(l){return Math.max(0,l.max_rewards-lineRewardUsed(l.id))}
+function resolvePhase(){if(S.resolving||!S.running)return;S.resolving=true;const rewards=[];D.lines.forEach(l=>{const winners=resolve(l);if(!winners.length)return;const remaining=lineRewardRemaining(l);if(remaining<winners.length){log(`PASS · ${l.name} · ${winners.length} players crossed, but only ${remaining} Reward left · NO REWARD`);return}const s=line(l.id);winners.forEach(p=>{s.rewards[p]++;S.players[p].by[l.id]=(S.players[p].by[l.id]||0)+1;rewards.push([p,l.name,s.rewards[p],scoreFor(p,l)]);log(`REWARD · ${p} · ${l.name} ×${s.rewards[p]} · SCORE ${scoreFor(p,l)}`,'reward')})});render();
  const win=D.players.filter(p=>D.lines.every(l=>(S.players[p].by[l.id]||0)>=3));if(win.length)return end(win.join(', ')+' WIN');
- const exhausted=D.lines.every(l=>D.players.reduce((n,p)=>n+S.lines[l.id].rewards[p],0)>=l.max_rewards);if(exhausted)return end('ALL REWARDS EXHAUSTED');
+ const exhausted=D.lines.every(l=>lineRewardRemaining(l)<=0);if(exhausted)return end('ALL REWARDS EXHAUSTED');
  if(S.phase>=D.max_phases)return end(`${D.max_phases} PHASES REACHED`);
  S.phase++;startPhase()}
 function simulateLine(lid,p){
@@ -174,7 +176,7 @@ function render(){
    const buttonLabel=pending?'CONFIRM '+l.name:(s.buffer.length>=MAX_QUEUE&&!s.buffer.includes('Human')?'FULL · '+l.name:'LINE '+l.name);
    L.insertAdjacentHTML('beforeend',`<div class="line-wrap">
      <div class="line" style="--lc:${lineColors[l.name]||'#888'}">
-       <div class="lhead"><div class="lname">${esc(l.name)}</div><div class="stat">FV <b>${l.fixed_value}</b></div><div class="stat">Reward <b>${Math.max(...D.players.map(x=>s.rewards[x]||0))}/${l.max_rewards}</b></div><div class="stat">Max <b>21</b></div></div>
+       <div class="lhead"><div class="lname">${esc(l.name)}</div><div class="stat">FV <b>${l.fixed_value}</b></div><div class="stat">Reward <b>${lineRewardRemaining(l)}/${l.max_rewards}</b></div><div class="stat">Max <b>21</b></div></div>
        <div class="queue">${q}</div>
      </div>
      <button class="line-action ${pending?'active':''}" style="--lc:${lineColors[l.name]||'#888'}" data-line="${esc(l.id)}" ${can?'':'disabled'}>${buttonLabel}</button>
