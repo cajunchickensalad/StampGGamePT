@@ -32,7 +32,7 @@ table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center
 </main>
 
 </div>
-<div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalClose">CLOSE</button><button id="modalNew">NEW GAME</button></div></div>
+<div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalClose" type="button">CLOSE</button><button id="modalNew" type="button">NEW GAME</button></div></div>
 <script>
 'use strict';
 const MAX_QUEUE=21;
@@ -224,14 +224,21 @@ function render(){
    }
    const rowCount=Math.ceil(slots/fv);
    const pathParts=[];
-   for(let i=0;i<slots;i++){
-     const row=Math.floor(i/fv);
-     const pos=i%fv;
-     const col=row%2===0?pos:fv-1-pos;
-     const x=((col+0.5)/4)*100;
-     const y=(row+0.5)/rowCount*100;
-     if(i===0)pathParts.push(`M ${x} ${y}`);
-     else pathParts.push(`L ${x} ${y}`);
+   // Only draw the vertical turn connectors between rows. Horizontal lines
+   // overlap the buffer row/slot borders and make the Snake harder to read.
+   for(let row=0;row<rowCount-1;row++){
+     const lastIndex=Math.min(slots-1,(row+1)*fv-1);
+     const nextIndex=lastIndex+1;
+     if(nextIndex>=slots)break;
+     const lastCol=row%2===0?fv-1:0;
+     const nextRow=Math.floor(nextIndex/fv);
+     const nextPos=nextIndex%fv;
+     const nextCol=nextRow%2===0?nextPos:fv-1-nextPos;
+     const x1=((lastCol+0.5)/4)*100;
+     const x2=((nextCol+0.5)/4)*100;
+     const y1=(row+0.5)/rowCount*100;
+     const y2=(nextRow+0.5)/rowCount*100;
+     pathParts.push(`M ${x1} ${y1} L ${x2} ${y2}`);
    }
    q+=`<svg class="snake-path" style="--lc:${cc}" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="${pathParts.join(' ')}"></path></svg>`;
    const isHumanTurn=p==='Human'&&!S.resolving&&S.running;
