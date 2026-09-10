@@ -12,15 +12,14 @@ header{height:48px;display:flex;align-items:center;justify-content:space-between
 .logo{font-size:15px;font-weight:800;letter-spacing:.08em}.meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px}.speed{display:flex;gap:2px}.speed button{height:22px;min-width:24px;padding:0 4px;border:1px solid var(--border);border-radius:4px;background:#fff;color:var(--muted);font-size:9px;font-weight:800;cursor:pointer}.speed button.active{background:#eef3f8;color:var(--accent);border-color:var(--accent)}.meta select{height:22px;border:1px solid var(--border);border-radius:4px;background:#fff;color:var(--muted);font-size:9px;font-weight:800;padding:0 2px}.meta b{color:var(--text)}.top-new{height:24px;padding:0 7px;border:1px solid var(--border);border-radius:5px;background:#fff;color:var(--muted);font-size:9px;font-weight:800;cursor:pointer}.top-new:hover{border-color:var(--accent);color:var(--accent)}
 main{flex:1;overflow:auto;padding:7px}.box{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;box-shadow:0 1px 2px #00000008}.title{height:30px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--muted)}
 #lines{display:grid;grid-template-columns:repeat(5,var(--line-width));gap:6px;overflow:hidden;padding:6px}.line-wrap{width:var(--line-width);display:flex;flex-direction:column;gap:4px}.line{width:var(--line-width);height:320px;background:var(--panel2);border:1px solid var(--lc);border-radius:8px;overflow:hidden}.lhead{padding:6px 7px;border-bottom:1px solid var(--border);border-top:4px solid var(--lc)}.lname{font-size:20px;line-height:20px;font-weight:850;color:var(--lc)}.stat{font-size:10px;color:var(--muted);line-height:1.25}.stat b{color:var(--text)}
-.queue{padding:6px 5px;display:grid;grid-template-columns:repeat(4,var(--slot-size));grid-auto-rows:var(--slot-size);row-gap:1px;column-gap:2px;position:relative;overflow:visible;align-content:start}.slot{width:var(--slot-size);height:var(--slot-size);border:1px solid var(--lc);border-radius:3px;display:flex;align-items:center;justify-content:center;background:#fff;color:#a5adb5;font-size:8px;font-weight:750;min-width:0;position:relative}.slot.active-empty{background:color-mix(in srgb,var(--lc) 24%,#fff);border-color:var(--lc);color:transparent}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#cfd4d9!important;background:#eef0f2!important;color:#b8bec4!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}.snake-x{width:7px;height:1px;justify-self:center;align-self:center;background:var(--lc);border-radius:0;opacity:.65;pointer-events:none}
-#turn{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 8px 4px;font-size:12px;font-weight:650}.turn-msg{flex:1;text-align:center}.turn-wait{height:30px;min-width:58px;padding:0 8px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);font-size:10px;font-weight:750;cursor:pointer}.turn-wait:disabled{opacity:.35;cursor:not-allowed}.turn{font-weight:800;color:var(--accent)}.status{font-size:10px;color:var(--muted);text-align:center;padding:6px 8px;border-top:1px solid var(--border);background:var(--panel2)}
+.queue{padding:6px 5px;display:grid;grid-template-columns:repeat(4,var(--slot-size));grid-auto-rows:var(--slot-size);row-gap:1px;column-gap:2px;position:relative;overflow:visible;align-content:start}.snake-path{position:absolute;left:5px;top:6px;width:calc(100% - 10px);height:calc(100% - 12px);z-index:0;pointer-events:none;overflow:visible}.snake-path path{fill:none;stroke:var(--lc);stroke-width:1;opacity:.65;stroke-linecap:square}.slot{z-index:1}.slot{width:var(--slot-size);height:var(--slot-size);border:1px solid var(--lc);border-radius:3px;display:flex;align-items:center;justify-content:center;background:#fff;color:#a5adb5;font-size:8px;font-weight:750;min-width:0;position:relative}.slot.active-empty{background:color-mix(in srgb,var(--lc) 24%,#fff);border-color:var(--lc);color:transparent}.slot.filled{color:#fff;border-color:var(--pc);background:var(--pc)}.slot.inactive{border-color:#cfd4d9!important;background:#eef0f2!important;color:#b8bec4!important;opacity:1}.slot.preview{border:1px dashed var(--pc);background:#fff;color:var(--pc);font-weight:850}#turn{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 8px 4px;font-size:12px;font-weight:650}.turn-msg{flex:1;text-align:center}.turn-wait{height:30px;min-width:58px;padding:0 8px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);font-size:10px;font-weight:750;cursor:pointer}.turn-wait:disabled{opacity:.35;cursor:not-allowed}.turn{font-weight:800;color:var(--accent)}.status{font-size:10px;color:var(--muted);text-align:center;padding:6px 8px;border-top:1px solid var(--border);background:var(--panel2)}
 .line-action{height:36px;width:var(--line-width);border:1px solid var(--lc);border-radius:7px;background:#fff;color:var(--text);font-size:11px;font-weight:750;cursor:pointer}.line-action:hover:not(:disabled){border-color:var(--lc);background:color-mix(in srgb,var(--lc) 9%,#fff)}.line-action:disabled{opacity:.35;cursor:not-allowed}.line-action.active{box-shadow:0 0 0 2px color-mix(in srgb,var(--lc) 20%,transparent)}button:disabled{opacity:.35;cursor:not-allowed}
 #players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px;overflow:hidden}.player{background:var(--panel2);border:1px solid var(--pc);border-top:3px solid var(--pc);border-radius:8px;padding:6px}.player.current{box-shadow:0 0 0 2px color-mix(in srgb,var(--pc) 25%,transparent)}.phead{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800;color:var(--pc)}.total{font-size:16px;color:var(--text)}
 table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center;table-layout:fixed;width:max-content}th,td{border:1px solid var(--border);padding:0;width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}th{color:var(--muted);font-weight:750}td.hit{background:color-mix(in srgb,var(--pc) 16%,#fff);color:var(--pc);font-weight:850}.score-line{font-weight:800}
 #log{height:95px;overflow:auto;padding:6px;font-size:9px;line-height:1.45;color:var(--muted)}.reward{color:var(--good);font-weight:700}.error{color:var(--danger)}
 .bottom{height:54px;display:flex;gap:6px;padding:7px;background:var(--panel);border-top:1px solid var(--border)}.bottom button{flex:1}.primary{background:#f5f7fa!important;border-color:#aeb8c2!important}
 #modal{display:none;position:fixed;inset:0;background:#17212b66;align-items:center;justify-content:center;padding:18px}.modal{width:min(360px,100%);background:#fff;border:1px solid var(--border);padding:17px;border-radius:10px;box-shadow:0 12px 40px #0002}.modal h2{margin:0 0 8px;font-size:19px}.modal button{width:100%;margin-top:14px;height:36px;border:1px solid var(--border);border-radius:7px;background:#fff}
-@media(max-width:430px){#app{width:100%;--line-width:calc((100vw - 38px)/5);--slot-size:calc((var(--line-width) - 10px - 6px)/4);}.line{width:var(--line-width);height:320px}.line-wrap{width:var(--line-width)}#lines{grid-template-columns:repeat(5,var(--line-width));gap:4px;padding:6px 4px}.queue{padding:6px 5px;grid-template-columns:repeat(4,var(--slot-size));column-gap:2px;row-gap:1px}.slot{width:var(--slot-size);height:var(--slot-size);font-size:7px}.snake-x{width:7px;height:1px}.line-action{width:var(--line-width);font-size:9px}.bottom button{min-width:0}.player{min-width:0}table{font-size:7px}th,td{width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}}
+@media(max-width:430px){#app{width:100%;--line-width:calc((100vw - 38px)/5);--slot-size:calc((var(--line-width) - 10px - 6px)/4);}.line{width:var(--line-width);height:320px}.line-wrap{width:var(--line-width)}#lines{grid-template-columns:repeat(5,var(--line-width));gap:4px;padding:6px 4px}.queue{padding:6px 5px;grid-template-columns:repeat(4,var(--slot-size));column-gap:2px;row-gap:1px}.slot{width:var(--slot-size);height:var(--slot-size);font-size:7px}.line-action{width:var(--line-width);font-size:9px}.bottom button{min-width:0}.player{min-width:0}table{font-size:7px}th,td{width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}}
 </style>
 </head>
 <body>
@@ -33,7 +32,7 @@ table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center
 </main>
 
 </div>
-<div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalNew">NEW GAME</button></div></div>
+<div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalClose">CLOSE</button><button id="modalNew">NEW GAME</button></div></div>
 <script>
 'use strict';
 const MAX_QUEUE=21;
@@ -74,8 +73,8 @@ function resolvePhase(){if(S.resolving||!S.running)return;S.resolving=true;const
 */
 const AI_LEVELS={
   easy:{self:10000,block:0,score:6,position:100,noise:150},
-  normal:{self:10000,block:70,score:12,position:180,noise:24},
-  hard:{self:10000,block:180,score:16,position:220,noise:6}
+  normal:{self:10000,block:24,score:12,position:180,noise:24},
+  hard:{self:10000,block:60,score:16,position:220,noise:6}
 };
 let aiLevel='normal';
 function cloneBuffers(){const out={};D.lines.forEach(l=>{out[l.id]=line(l.id).buffer.slice()});return out}
@@ -123,23 +122,31 @@ function currentThreats(){
   return out;
 }
 function actionDeltaForOpponent(candidate,p,opp,baseThreat){
+  // Normal play should not cause the AI to chase an opponent merely because
+  // that opponent can also score this phase. Blocking is reserved for a real
+  // 3rd-Reward win threat. This prevents several AIs from piling onto the
+  // same line simply because Human entered it.
   const currentLine=D.lines.find(l=>line(l.id).buffer.includes(opp));
   const projectedLine=D.lines.find(l=>candidate.buffers[l.id].includes(opp));
+  const beforeCount=Math.max(0,...D.lines.map(l=>S.players[opp].by[l.id]||0));
+  if(beforeCount<2)return 0;
+
   const beforeReward=baseThreat[opp]||0;
   const afterReward=candidate.rewardBy[opp]||0;
-  if(beforeReward<=afterReward)return 0;
-  const beforeScore=beforeReward>0&&currentLine?scoreFor(opp,currentLine):0;
-  const afterScore=afterReward>0&&projectedLine?scoreFor(opp,projectedLine):0;
-  const currentCounts=D.lines.map(l=>S.players[opp].by[l.id]||0);
-  const maxCurrent=Math.max(0,...currentCounts);
   const projectedCounts=D.lines.map(l=>{
-    const gained=(candidate.rewardBy[opp]||0)>0&&String(l.id)===String(projectedLine?.id)?1:0;
+    const gained=(afterReward>0&&projectedLine&&String(l.id)===String(projectedLine.id))?1:0;
     return (S.players[opp].by[l.id]||0)+gained;
   });
-  const maxProjected=Math.max(0,...projectedCounts);
-  const nearWin=(maxCurrent>=2&&maxProjected<3)?1:0;
-  const rewardBlock=beforeReward-afterReward;
-  return Math.max(0,beforeScore-afterScore)+rewardBlock*18+nearWin*55;
+  const afterCount=Math.max(0,...projectedCounts);
+  if(afterCount>=3)return 0;
+
+  // Reward capacity can also make an apparent 3rd reward disappear. Only
+  // value the action when it actually removes that immediate win.
+  const stopsWin=beforeCount>=2 && beforeReward>0;
+  if(!stopsWin)return 0;
+  const beforeScore=scoreFor(opp,currentLine||D.lines[0]);
+  const afterScore=afterReward>0&&projectedLine?scoreFor(opp,projectedLine):0;
+  return Math.max(0,beforeScore-afterScore)+55;
 }
 function actionPosition(buffers,p,lid){
   const b=buffers[lid]||[], pos=b.indexOf(p); if(pos<0)return 999;
@@ -186,7 +193,7 @@ function ai(p){
 function next(){if(!S.running||S.resolving)return;if(S.idx>=S.order.length){resolvePhase();return}const p=S.order[S.idx];render();if(p==='Human')return;clearTimeout(timer);timer=setTimeout(()=>ai(p),AI_DELAYS[gameSpeed])}
 function human(id){if(!S.running||S.resolving||S.order[S.idx]!=='Human')return;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return;const s=line(l.id);const same=s.buffer.includes('Human');if(String(pendingLine)===String(id)){pendingLine=null;if(same){log('Human · WAIT');S.idx++;next()}else if(choose('Human',id)){S.idx++;next()}}else{pendingLine=id;render()}}
 function wait(){if(S.running&&!S.resolving&&S.order[S.idx]==='Human'){pendingLine=null;log('Human · WAIT');S.idx++;next()}}
-document.querySelector('#aiLevel').addEventListener('change',e=>{aiLevel=e.target.value});document.querySelector('#wait').addEventListener('click',wait);document.querySelector('#newTop').addEventListener('click',resetState);document.querySelector('#modalNew').addEventListener('click',resetState);document.querySelectorAll('.speed button').forEach(btn=>btn.addEventListener('click',()=>{gameSpeed=+btn.dataset.speed;document.querySelectorAll('.speed button').forEach(b=>b.classList.toggle('active',b===btn));}));
+document.querySelector('#aiLevel').addEventListener('change',e=>{aiLevel=e.target.value});document.querySelector('#wait').addEventListener('click',wait);document.querySelector('#newTop').addEventListener('click',resetState);document.querySelector('#modalClose').addEventListener('click',()=>{document.querySelector('#modal').style.display='none'});document.querySelector('#modalNew').addEventListener('click',resetState);document.querySelectorAll('.speed button').forEach(btn=>btn.addEventListener('click',()=>{gameSpeed=+btn.dataset.speed;document.querySelectorAll('.speed button').forEach(b=>b.classList.toggle('active',b===btn));}));
 function render(){
  if(!D||!S)return;
  document.querySelector('#phase').textContent=S.phase;
@@ -199,7 +206,8 @@ function render(){
    const s=line(l.id),slots=21;
    let q='';
    const cc=lineColors[l.name]||'#888';
-   // Snake path: each row contains exactly FV slots; separator only on the non-connecting side.
+   // Snake path: connect the centers of consecutive slots. Horizontal runs
+   // alternate direction; the row transition is a vertical segment at the end point.
    const fv=Number(l.fixed_value);
    const posOf=i=>{
      const row=Math.floor(i/fv);
@@ -214,14 +222,18 @@ function render(){
      const state=x?'filled '+cls(x):(preview?'preview':(i<s.buffer.length?'active-empty':'inactive'));
      q+=`<div class="slot ${state}" style="grid-row:${row};grid-column:${col+1};--pc:${x?(playerColors[x]||'#607080'):(preview?playerColors.Human:'transparent')};--lc:${cc}">${x?esc(x==='Human'?'H':x.replace('AI ','A')):preview?'H':''}</div>`;
    }
-   for(let row=0;row<Math.ceil(slots/fv)-1;row++){
-     const gridRow=row*2+2;
-     const connectorCount=Math.max(0,Math.min(fv-1, slots-row*fv));
-     if(connectorCount>0){
-       const startCol=(row%2===0)?1:2;
-       q+=`<div class="snake-x" style="grid-row:${gridRow};grid-column:${startCol};--lc:${cc}"></div>`;
-     }
+   const rowCount=Math.ceil(slots/fv);
+   const pathParts=[];
+   for(let i=0;i<slots;i++){
+     const row=Math.floor(i/fv);
+     const pos=i%fv;
+     const col=row%2===0?pos:fv-1-pos;
+     const x=((col+0.5)/4)*100;
+     const y=(row+0.5)/rowCount*100;
+     if(i===0)pathParts.push(`M ${x} ${y}`);
+     else pathParts.push(`L ${x} ${y}`);
    }
+   q+=`<svg class="snake-path" style="--lc:${cc}" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="${pathParts.join(' ')}"></path></svg>`;
    const isHumanTurn=p==='Human'&&!S.resolving&&S.running;
    const can=isHumanTurn;
    const pending=String(pendingLine)===String(l.id)&&isHumanTurn;
