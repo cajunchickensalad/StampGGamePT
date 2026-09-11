@@ -84,6 +84,7 @@ function scoreFor(p,l){const c=S.players[p].by[l.id]||0;if(!c)return 0;const r=s
 function total(p){return D.lines.reduce((n,l)=>n+scoreFor(p,l),0)}
 function resetState(){clearTimeout(timer);pendingLine=null;document.querySelector('#modal').style.display='none';S={phase:1,order:[],idx:0,lines:{},players:{},running:true,resolving:false};D.lines.forEach(l=>S.lines[String(l.id)]={buffer:[],rewards:{}});D.players.forEach(p=>{S.players[p]={by:{}};D.lines.forEach(l=>S.lines[String(l.id)].rewards[p]=0)});document.querySelector('#log').innerHTML='';log('NEW GAME · BOARD INITIALIZED');startPhase()}
 function bufferProbabilities(type){return D.buffer_types.find(x=>String(x.id)===String(type))?.probabilities||{0:100}}
+function startPhase(){if(!S.running)return;S.resolving=false;addBuffer();S.order=[...D.players].sort(()=>Math.random()-0.5);S.idx=0;log(`PHASE ${S.phase} START · ORDER ${S.order.join(' → ')}`);render();next()}
 function addBuffer(){D.lines.forEach(l=>{const v=weighted(bufferProbabilities(l.buffer_type_id));if(v>0){const s=line(l.id);for(let i=0;i<v;i++)if(s.buffer.length<MAX_QUEUE)s.buffer.push(null)}})}
 function removePlayer(p){D.lines.forEach(l=>{const b=line(l.id).buffer;for(let i=0;i<b.length;i++)if(b[i]===p)b[i]=null})}
 function choose(p,id){if(!S.running||S.resolving)return false;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return false;const target=line(l.id).buffer;if(target.includes(p))return true;if(target.length>=MAX_QUEUE)return false;removePlayer(p);target.push(p);log(`${p} → LINE ${l.name}`);render();return true}
