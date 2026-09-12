@@ -18,6 +18,7 @@ main{flex:1;overflow:auto;padding:7px}.box{background:var(--panel);border:1px so
 table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center;table-layout:fixed;width:max-content}th,td{border:1px solid var(--border);padding:0;width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}th{color:var(--muted);font-weight:750}td.hit{background:color-mix(in srgb,var(--pc) 16%,#fff);color:var(--pc);font-weight:850}.score-line{font-weight:800}
 #log{height:95px;overflow:auto;padding:6px;font-size:9px;line-height:1.45;color:var(--muted)}.reward{color:var(--good);font-weight:700}.error{color:var(--danger)}
 .bottom{height:54px;display:flex;gap:6px;padding:7px;background:var(--panel);border-top:1px solid var(--border)}.bottom button{flex:1}.primary{background:#f5f7fa!important;border-color:#aeb8c2!important}
+#action-stage{position:fixed;inset:0;pointer-events:none;z-index:30;display:none}.action-message{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);min-width:210px;max-width:min(360px,calc(100vw - 32px));padding:8px 14px 9px;background:rgba(255,255,255,.96);border:1px solid #bfc7cf;border-radius:8px;box-shadow:0 8px 24px #0002;text-align:center;opacity:0;animation:actionIn .16s ease-out forwards}.action-message .who{font-size:10px;font-weight:850;letter-spacing:.08em;color:var(--pc,#4169a1);text-transform:uppercase}.action-message .what{margin-top:2px;font-size:13px;font-weight:850;color:var(--text);letter-spacing:.03em}.action-message .detail{margin-top:2px;font-size:9px;color:var(--muted)}.action-arrow{position:absolute;overflow:visible}.action-arrow path{fill:none;stroke:var(--pc,#4169a1);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:7 5;animation:arrowFlow .5s linear infinite}.action-arrow polygon{fill:var(--pc,#4169a1)}@keyframes actionIn{to{opacity:1}}@keyframes arrowFlow{to{stroke-dashoffset:-12}}.ai-token{cursor:pointer}.ai-token:hover{filter:brightness(1.08)}.ai-token.replay{outline:2px solid var(--pc);outline-offset:2px;animation:tokenPulse .55s ease-out 2}@keyframes tokenPulse{50%{transform:scale(1.14)}}@media(max-width:430px){.action-message{bottom:72px;min-width:180px;padding:7px 11px}.action-message .what{font-size:12px}}
 #modal{display:none;position:fixed;inset:0;background:#17212b66;align-items:center;justify-content:center;padding:18px}.modal{width:min(360px,100%);background:#fff;border:1px solid var(--border);padding:17px;border-radius:10px;box-shadow:0 12px 40px #0002}.modal h2{margin:0 0 8px;font-size:19px}.modal button{width:100%;margin-top:14px;height:36px;border:1px solid var(--border);border-radius:7px;background:#fff}
 @media(max-width:430px){#app{width:100%;--line-width:calc((100vw - 38px)/5);--slot-size:calc((var(--line-width) - 10px - 6px)/4);}.line{width:var(--line-width);height:320px}.line-wrap{width:var(--line-width)}#lines{grid-template-columns:repeat(5,var(--line-width));gap:4px;padding:6px 4px}.queue{padding:6px 5px;grid-template-columns:repeat(4,var(--slot-size));column-gap:2px;row-gap:1px}.slot{width:var(--slot-size);height:var(--slot-size);font-size:7px}.line-action{width:var(--line-width);font-size:9px}.bottom button{min-width:0}.player{min-width:0}table{font-size:7px}th,td{width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}}
 </style>
@@ -32,11 +33,12 @@ table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center
 </main>
 
 </div>
+<div id="action-stage" aria-live="polite"><div id="action-message" class="action-message"></div><svg id="action-arrow" class="action-arrow" aria-hidden="true"></svg></div>
 <div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalClose" type="button">CLOSE</button><button id="modalNew" type="button">NEW GAME</button></div></div>
 <script>
 'use strict';
 const MAX_QUEUE=21;
-let D=null,S=null,timer=null,pendingLine=null,gameSpeed=4;
+let D=null,S=null,timer=null,pendingLine=null,gameSpeed=4,actionTimer=null,lastActions={};
 const AI_DELAYS={1:1680,2:840,4:420};
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cls=p=>p==='Human'?'H':p==='AI 1'?'A1':p==='AI 2'?'A2':'A3';
@@ -48,7 +50,7 @@ function log(x,c=''){const e=document.createElement('div');e.className=c;e.textC
 function scoreRows(lid){const row=D.score_table.find(r=>String(r.line_pool_id)===String(lid));return row?[row.tier1,row.tier2,row.tier3,row.tier4,row.tier5]:[0,0,0,0,0]}
 function scoreFor(p,l){const c=S.players[p].by[l.id]||0;if(!c)return 0;const r=scoreRows(l.id);return r[Math.min(c-1,4)]||0}
 function total(p){return D.lines.reduce((n,l)=>n+scoreFor(p,l),0)}
-function resetState(){clearTimeout(timer);pendingLine=null;document.querySelector('#modal').style.display='none';S={phase:1,order:[],idx:0,lines:{},players:{},running:true,resolving:false};D.lines.forEach(l=>S.lines[String(l.id)]={buffer:[],rewards:{}});D.players.forEach(p=>{S.players[p]={by:{}};D.lines.forEach(l=>S.lines[String(l.id)].rewards[p]=0)});document.querySelector('#log').innerHTML='';log('NEW GAME');startPhase()}
+function resetState(){clearTimeout(timer);clearTimeout(actionTimer);pendingLine=null;lastActions={};hideAction();document.querySelector('#modal').style.display='none';S={phase:1,order:[],idx:0,lines:{},players:{},running:true,resolving:false};D.lines.forEach(l=>S.lines[String(l.id)]={buffer:[],rewards:{}});D.players.forEach(p=>{S.players[p]={by:{}};D.lines.forEach(l=>S.lines[String(l.id)].rewards[p]=0)});document.querySelector('#log').innerHTML='';log('NEW GAME');startPhase()}
 function bufferProbabilities(type){const row=D.buffer_types.find(r=>r.name===type);if(!row)return {};if(typeof row.probabilities==='string'){try{return JSON.parse(row.probabilities)}catch{return {}}}return row.probabilities||{}}
 function addBuffer(){const mp={};for(const r of D.line_phase_map||[]){if(+r.phase_number===S.phase){const bt=D.buffer_types.find(x=>+x.id===+r.buffer_type_id);if(bt)mp[r.line_pool_id]=bt.name}}
  D.lines.forEach(l=>{const typ=mp[l.id]||'Normal',prob=bufferProbabilities(typ),s=line(l.id),drawn=+weighted(prob),add=Math.min(MAX_QUEUE-s.buffer.length,Math.max(0,drawn));for(let i=0;i<add;i++)s.buffer.push(null);if(add)log(`P${S.phase} · ${l.name} +${add} (${typ})`)});
@@ -186,11 +188,29 @@ function ai(p){
   const tieWindow=aiLevel==='hard'?4:aiLevel==='normal'?18:70;
   const top=opts.filter(x=>best-x.score<=tieWindow);
   const pick=top[Math.floor(Math.random()*top.length)];
+  const fromLine=getPlayerLine(p);
+  const action=pick.action==='STAY'?{player:p,type:'stay',from:pick.l.name,to:pick.l.name}:{player:p,type:fromLine?'move':'enter',from:fromLine?fromLine.name:null,to:pick.l.name};
+  lastActions[p]=action;
   if(pick.action==='STAY')log(`${p} · STAY · ${pick.l.name}`);
   else choose(p,pick.l.id);
+  showAction(action);
   S.idx++;next();
 }
 function next(){if(!S.running||S.resolving)return;if(S.idx>=S.order.length){resolvePhase();return}const p=S.order[S.idx];render();if(p==='Human')return;clearTimeout(timer);timer=setTimeout(()=>ai(p),AI_DELAYS[gameSpeed])}
+function playerLabel(p){return p==='Human'?'YOU':p}
+function getPlayerLine(p){return D.lines.find(l=>line(l.id).buffer.includes(p))||null}
+function hideAction(){const stage=document.querySelector('#action-stage');if(stage)stage.style.display='none';const arrow=document.querySelector('#action-arrow');if(arrow)arrow.innerHTML='';}
+function actionText(a){if(a.type==='stay')return {what:`STAYS · ${a.to}`,detail:'CURRENT LINE'};if(a.type==='enter')return {what:`ENTERS · ${a.to}`,detail:'NEW LINE'};return {what:`MOVES · ${a.from} → ${a.to}`,detail:'LINE CHANGE'};}
+function showAction(a,replay=false){
+ const stage=document.querySelector('#action-stage'),msg=document.querySelector('#action-message'),arrow=document.querySelector('#action-arrow'); if(!stage||!msg||!arrow)return;
+ clearTimeout(actionTimer); const t=actionText(a),pc=playerColors[a.player]||'#4169a1'; msg.style.setProperty('--pc',pc); msg.innerHTML=`<div class="who">${esc(playerLabel(a.player))}</div><div class="what">${esc(t.what)}</div><div class="detail">${esc(t.detail)}${replay?' · LAST ACTION':''}</div>`; stage.style.display='block'; arrow.innerHTML='';
+ if(a.type!=='stay'&&a.to){
+   const fromEl=a.from?document.querySelector(`.line-wrap[data-line-name="${a.from}"]`):null,toEl=document.querySelector(`.line-wrap[data-line-name="${a.to}"]`);
+   if(toEl){const tr=toEl.getBoundingClientRect(),x2=tr.left+tr.width/2,y2=tr.top+72;let x1=window.innerWidth/2,y1=tr.top-22;if(fromEl){const fr=fromEl.getBoundingClientRect();x1=fr.left+fr.width/2;y1=fr.top+72}const dx=x2-x1,dy=y2-y1,len=Math.max(1,Math.hypot(dx,dy)),pad=8,sx=x1+dx/len*pad,sy=y1+dy/len*pad,ex=x2-dx/len*18,ey=y2-dy/len*18,minX=Math.min(sx,ex)-18,minY=Math.min(sy,ey)-18,maxX=Math.max(sx,ex)+18,maxY=Math.max(sy,ey)+18,w=Math.max(36,maxX-minX),h=Math.max(36,maxY-minY);arrow.style.left=`${minX}px`;arrow.style.top=`${minY}px`;arrow.style.width=`${w}px`;arrow.style.height=`${h}px`;arrow.setAttribute('viewBox',`0 0 ${w} ${h}`);const ax=sx-minX,ay=sy-minY,bx=ex-minX,by=ey-minY,ang=Math.atan2(by-ay,bx-ax),sz=10,p1x=bx-sz*Math.cos(ang-Math.PI/6),p1y=by-sz*Math.sin(ang-Math.PI/6),p2x=bx-sz*Math.cos(ang+Math.PI/6),p2y=by-sz*Math.sin(ang+Math.PI/6);arrow.innerHTML=`<path d="M ${ax} ${ay} L ${bx} ${by}" style="--pc:${pc}"></path><polygon points="${bx},${by} ${p1x},${p1y} ${p2x},${p2y}" style="--pc:${pc}"></polygon>`}
+ } else {const target=document.querySelector(`.slot.ai-token[data-player="${CSS.escape(a.player)}"]`);if(target){target.classList.add('replay');setTimeout(()=>target.classList.remove('replay'),900)}}
+ const duration=replay?1050:(gameSpeed===4?620:gameSpeed===2?820:1050); actionTimer=setTimeout(hideAction,duration);
+}
+function replayAI(p){const a=lastActions[p];if(a)showAction(a,true)}
 function human(id){if(!S.running||S.resolving||S.order[S.idx]!=='Human')return;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return;const s=line(l.id);const same=s.buffer.includes('Human');if(String(pendingLine)===String(id)){pendingLine=null;if(same){log('Human · WAIT');S.idx++;next()}else if(choose('Human',id)){S.idx++;next()}}else{pendingLine=id;render()}}
 function wait(){if(S.running&&!S.resolving&&S.order[S.idx]==='Human'){pendingLine=null;log('Human · WAIT');S.idx++;next()}}
 document.querySelector('#aiLevel').addEventListener('change',e=>{aiLevel=e.target.value});document.querySelector('#wait').addEventListener('click',wait);document.querySelector('#newTop').addEventListener('click',resetState);document.querySelector('#modalClose').addEventListener('click',()=>{document.querySelector('#modal').style.display='none'});document.querySelector('#modalNew').addEventListener('click',resetState);document.querySelectorAll('.speed button').forEach(btn=>btn.addEventListener('click',()=>{gameSpeed=+btn.dataset.speed;document.querySelectorAll('.speed button').forEach(b=>b.classList.toggle('active',b===btn));}));
@@ -220,7 +240,7 @@ function render(){
      const x=s.buffer[i]||null;
      const preview=!x&&!s.buffer.includes('Human')&&String(pendingLine)===String(l.id)&&p==='Human'&&i===s.buffer.length;
      const state=x?'filled '+cls(x):(preview?'preview':(i<s.buffer.length?'active-empty':'inactive'));
-     q+=`<div class="slot ${state}" style="grid-row:${row};grid-column:${col+1};--pc:${x?(playerColors[x]||'#607080'):(preview?playerColors.Human:'transparent')};--lc:${cc}">${x?esc(x==='Human'?'H':x.replace('AI ','A')):preview?'H':''}</div>`;
+     q+=`<div class="slot ${state}${x&&x!=='Human'?' ai-token':''}" data-player="${x?esc(x):''}" title="${x&&x!=='Human'?'CLICK FOR LAST ACTION':''}" style="grid-row:${row};grid-column:${col+1};--pc:${x?(playerColors[x]||'#607080'):(preview?playerColors.Human:'transparent')};--lc:${cc}">${x?esc(x==='Human'?'H':x.replace('AI ','A')):preview?'H':''}</div>`;
    }
    const rowCount=Math.ceil(slots/fv);
    const pathParts=[];
@@ -245,7 +265,7 @@ function render(){
    const can=isHumanTurn;
    const pending=String(pendingLine)===String(l.id)&&isHumanTurn;
    const buttonLabel=pending?'CONFIRM '+l.name:(s.buffer.length>=MAX_QUEUE&&!s.buffer.includes('Human')?'FULL · '+l.name:'LINE '+l.name);
-   L.insertAdjacentHTML('beforeend',`<div class="line-wrap">
+   L.insertAdjacentHTML('beforeend',`<div class="line-wrap" data-line-name="${esc(l.name)}">
      <div class="line" style="--lc:${lineColors[l.name]||'#888'}">
        <div class="lhead"><div class="lname">${esc(l.name)}</div><div class="stat">FV <b>${l.fixed_value}</b></div><div class="stat">Reward <b>${lineRewardRemaining(l)}/${l.max_rewards}</b></div><div class="stat">Max <b>21</b></div></div>
        <div class="queue">${q}</div>
@@ -253,7 +273,7 @@ function render(){
      <button class="line-action ${pending?'active':''}" style="--lc:${lineColors[l.name]||'#888'}" data-line="${esc(l.id)}" ${can?'':'disabled'}>${buttonLabel}</button>
    </div>`);
  });
- document.querySelectorAll('.line-action').forEach(btn=>btn.addEventListener('click',()=>human(btn.dataset.line)));
+ document.querySelectorAll('.line-action').forEach(btn=>btn.addEventListener('click',()=>human(btn.dataset.line)));document.querySelectorAll('.ai-token').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();replayAI(el.dataset.player)}));
  document.querySelector('#actions').innerHTML='';
  document.querySelector('#players').innerHTML=D.players.map(x=>{
    const pc=playerColors[x]||'#607080';
