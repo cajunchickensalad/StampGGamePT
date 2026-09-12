@@ -18,7 +18,7 @@ main{flex:1;overflow:auto;padding:7px}.box{background:var(--panel);border:1px so
 table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center;table-layout:fixed;width:max-content}th,td{border:1px solid var(--border);padding:0;width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}th{color:var(--muted);font-weight:750}td.hit{background:color-mix(in srgb,var(--pc) 16%,#fff);color:var(--pc);font-weight:850}.score-line{font-weight:800}
 #log{height:95px;overflow:auto;padding:6px;font-size:9px;line-height:1.45;color:var(--muted)}.reward{color:var(--good);font-weight:700}.error{color:var(--danger)}
 .bottom{height:54px;display:flex;gap:6px;padding:7px;background:var(--panel);border-top:1px solid var(--border)}.bottom button{flex:1}.primary{background:#f5f7fa!important;border-color:#aeb8c2!important}
-#action-stage{position:fixed;inset:0;pointer-events:none;z-index:30;display:none}.action-message{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);min-width:210px;max-width:min(360px,calc(100vw - 32px));padding:8px 14px 9px;background:rgba(255,255,255,.96);border:1px solid #bfc7cf;border-radius:8px;box-shadow:0 8px 24px #0002;text-align:center;opacity:0;animation:actionIn .16s ease-out forwards}.action-message .who{font-size:10px;font-weight:850;letter-spacing:.08em;color:var(--pc,#4169a1);text-transform:uppercase}.action-message .what{margin-top:2px;font-size:13px;font-weight:850;color:var(--text);letter-spacing:.03em}.action-message .detail{margin-top:2px;font-size:9px;color:var(--muted)}.action-arrow{position:absolute;overflow:visible}.action-arrow path{fill:none;stroke:var(--pc,#4169a1);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:7 5;animation:arrowFlow .5s linear infinite}.action-arrow polygon{fill:var(--pc,#4169a1)}@keyframes actionIn{to{opacity:1}}@keyframes arrowFlow{to{stroke-dashoffset:-12}}.ai-token{cursor:pointer}.ai-token:hover{filter:brightness(1.08)}.ai-token.replay{outline:2px solid var(--pc);outline-offset:2px;animation:tokenPulse .55s ease-out 2}@keyframes tokenPulse{50%{transform:scale(1.14)}}@media(max-width:430px){.action-message{bottom:72px;min-width:180px;padding:7px 11px}.action-message .what{font-size:12px}}
+#action-feed{min-height:36px;margin:0 6px 6px;padding:6px 9px;border:1px solid var(--border);border-radius:7px;background:var(--panel2);display:flex;align-items:center;justify-content:center;text-align:center}.action-feed .who{font-size:9px;font-weight:850;letter-spacing:.08em;color:var(--pc,#4169a1);text-transform:uppercase}.action-feed .what{margin-left:7px;font-size:11px;font-weight:850;color:var(--text);letter-spacing:.02em}.action-feed .detail{margin-left:6px;font-size:9px;color:var(--muted)}.action-feed.empty{color:#a2a9b0;font-size:9px}.action-stage{position:fixed;inset:0;pointer-events:none;z-index:30;display:none}.action-arrow{position:absolute;overflow:visible}.action-arrow path{fill:none;stroke:var(--pc,#4169a1);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.action-arrow polygon{fill:var(--pc,#4169a1)}.action-ghost{fill:#fff;stroke:#aeb5bc;stroke-width:1.5;stroke-dasharray:4 3}.action-ghost-text{fill:#aeb5bc;font-size:10px;font-weight:850;text-anchor:middle;dominant-baseline:middle}.action-current{fill:var(--pc,#4169a1);stroke:var(--pc,#4169a1);stroke-width:1.5}.action-current-text{fill:#fff;font-size:10px;font-weight:850;text-anchor:middle;dominant-baseline:middle}.ai-token{cursor:pointer}.ai-token:hover{filter:brightness(1.08)}.ai-token.replay{outline:2px solid var(--pc);outline-offset:2px;animation:tokenPulse .55s ease-out 2}@keyframes tokenPulse{50%{transform:scale(1.14)}}@media(max-width:430px){.action-feed{margin-left:4px;margin-right:4px}.action-feed .what{font-size:10px}}
 #modal{display:none;position:fixed;inset:0;background:#17212b66;align-items:center;justify-content:center;padding:18px}.modal{width:min(360px,100%);background:#fff;border:1px solid var(--border);padding:17px;border-radius:10px;box-shadow:0 12px 40px #0002}.modal h2{margin:0 0 8px;font-size:19px}.modal button{width:100%;margin-top:14px;height:36px;border:1px solid var(--border);border-radius:7px;background:#fff}
 @media(max-width:430px){#app{width:100%;--line-width:calc((100vw - 38px)/5);--slot-size:calc((var(--line-width) - 10px - 6px)/4);}.line{width:var(--line-width);height:320px}.line-wrap{width:var(--line-width)}#lines{grid-template-columns:repeat(5,var(--line-width));gap:4px;padding:6px 4px}.queue{padding:6px 5px;grid-template-columns:repeat(4,var(--slot-size));column-gap:2px;row-gap:1px}.slot{width:var(--slot-size);height:var(--slot-size);font-size:7px}.line-action{width:var(--line-width);font-size:9px}.bottom button{min-width:0}.player{min-width:0}table{font-size:7px}th,td{width:18px;height:18px;min-width:18px;max-width:18px;line-height:18px}}
 </style>
@@ -27,13 +27,13 @@ table{border-collapse:collapse;margin:5px auto 0;font-size:7px;text-align:center
 <div id="app">
 <header><div class="logo">STAMP GAME</div><button id="newTop" class="top-new">NEW GAME</button><div class="meta"><div class="speed" aria-label="AI speed"><button data-speed="1">X1</button><button data-speed="2">X2</button><button data-speed="4" class="active">X4</button></div><select id="aiLevel" aria-label="AI difficulty"><option value="easy">EASY</option><option value="normal" selected>NORMAL</option><option value="hard">HARD</option></select><span>R1 · P<b id="phase">-</b>/30</span></div></header>
 <main>
-<section class="box"><div class="title"><span>LINES</span><span>PHASE START</span></div><div id="lines"></div><div id="turn"><span class="turn-msg"></span><button id="wait" class="turn-wait" disabled>WAIT</button></div><div id="actions"></div><div id="status" class="status"></div></section>
+<section class="box"><div class="title"><span>LINES</span><span>PHASE START</span></div><div id="lines"></div><div id="turn"><span class="turn-msg"></span><button id="wait" class="turn-wait" disabled>WAIT</button></div><div id="action-feed" class="action-feed empty">AI ACTIONS WILL APPEAR HERE</div><div id="actions"></div><div id="status" class="status"></div></section>
 <section class="box"><div class="title"><span>PLAYER SCOREBOARD</span><span>INDIVIDUAL</span></div><div id="players"></div></section>
 <section class="box"><div class="title"><span>EVENT LOG</span></div><div id="log"></div></section>
 </main>
 
 </div>
-<div id="action-stage" aria-live="polite"><div id="action-message" class="action-message"></div><svg id="action-arrow" class="action-arrow" aria-hidden="true"></svg></div>
+<div id="action-stage" class="action-stage"><svg id="action-arrow" class="action-arrow" aria-hidden="true"></svg></div>
 <div id="modal"><div class="modal"><h2>GAME END</h2><div id="modalText"></div><button id="modalClose" type="button">CLOSE</button><button id="modalNew" type="button">NEW GAME</button></div></div>
 <script>
 'use strict';
@@ -188,8 +188,10 @@ function ai(p){
   const tieWindow=aiLevel==='hard'?4:aiLevel==='normal'?18:70;
   const top=opts.filter(x=>best-x.score<=tieWindow);
   const pick=top[Math.floor(Math.random()*top.length)];
-  const fromLine=getPlayerLine(p);
-  const action=pick.action==='STAY'?{player:p,type:'stay',from:pick.l.name,to:pick.l.name}:{player:p,type:fromLine?'move':'enter',from:fromLine?fromLine.name:null,to:pick.l.name};
+  const fromPos=getPlayerPosition(p);
+  const action=pick.action==='STAY'
+    ? {player:p,type:'stay',from:pick.l.name,to:pick.l.name,toIndex:getPlayerPosition(p)?.index??null,label:p.replace('AI ','A')}
+    : {player:p,type:fromPos?'move':'enter',from:fromPos?fromPos.line.name:null,fromIndex:fromPos?fromPos.index:null,to:pick.l.name,toIndex:(line(pick.l.id).buffer.length),label:p.replace('AI ','A')};
   lastActions[p]=action;
   if(pick.action==='STAY')log(`${p} · STAY · ${pick.l.name}`);
   else choose(p,pick.l.id);
@@ -199,16 +201,57 @@ function ai(p){
 function next(){if(!S.running||S.resolving)return;if(S.idx>=S.order.length){resolvePhase();return}const p=S.order[S.idx];render();if(p==='Human')return;clearTimeout(timer);timer=setTimeout(()=>ai(p),AI_DELAYS[gameSpeed])}
 function playerLabel(p){return p==='Human'?'YOU':p}
 function getPlayerLine(p){return D.lines.find(l=>line(l.id).buffer.includes(p))||null}
-function hideAction(){const stage=document.querySelector('#action-stage');if(stage)stage.style.display='none';const arrow=document.querySelector('#action-arrow');if(arrow)arrow.innerHTML='';}
-function actionText(a){if(a.type==='stay')return {what:`STAYS · ${a.to}`,detail:'CURRENT LINE'};if(a.type==='enter')return {what:`ENTERS · ${a.to}`,detail:'NEW LINE'};return {what:`MOVES · ${a.from} → ${a.to}`,detail:'LINE CHANGE'};}
+function getPlayerPosition(p){
+ const l=getPlayerLine(p); if(!l)return null;
+ const b=line(l.id).buffer, index=b.indexOf(p);
+ return {line:l,index};
+}
+function hideAction(){
+ const stage=document.querySelector('#action-stage'); if(stage)stage.style.display='none';
+ const arrow=document.querySelector('#action-arrow'); if(arrow)arrow.innerHTML='';
+}
+function actionText(a){
+ if(a.type==='stay')return {what:`STAYS · ${a.to}`,detail:'CURRENT LINE'};
+ if(a.type==='enter')return {what:`ENTERS · ${a.to}`,detail:'NEW LINE'};
+ return {what:`MOVES · ${a.from} → ${a.to}`,detail:'LINE CHANGE'};
+}
+function setActionFeed(a,replay=false){
+ const el=document.querySelector('#action-feed'); if(!el)return;
+ const t=actionText(a),pc=playerColors[a.player]||'#4169a1';
+ el.classList.remove('empty'); el.style.setProperty('--pc',pc);
+ el.innerHTML=`<span class="who">${esc(playerLabel(a.player))}</span><span class="what">${esc(t.what)}</span><span class="detail">${esc(t.detail)}${replay?' · LAST ACTION':''}</span>`;
+}
+function slotViewportPosition(lineName,index){
+ const wrap=document.querySelector(`.line-wrap[data-line-name="${CSS.escape(lineName)}"]`);
+ if(!wrap)return null;
+ const q=wrap.querySelector('.queue'); if(!q)return null;
+ const cs=getComputedStyle(q), size=parseFloat(cs.getPropertyValue('--slot-size'))||parseFloat(getComputedStyle(document.documentElement).fontSize)||17;
+ const colGap=parseFloat(cs.columnGap)||2,rowGap=parseFloat(cs.rowGap)||1;
+ const fv=Number(D.lines.find(l=>String(l.name)===String(lineName)).fixed_value);
+ const row=Math.floor(index/fv),pos=index%fv,col=row%2===0?pos:fv-1-pos;
+ const qr=q.getBoundingClientRect();
+ return {x:qr.left+5+col*(size+colGap)+size/2,y:qr.top+6+row*(size+rowGap)+size/2,size};
+}
 function showAction(a,replay=false){
- const stage=document.querySelector('#action-stage'),msg=document.querySelector('#action-message'),arrow=document.querySelector('#action-arrow'); if(!stage||!msg||!arrow)return;
- clearTimeout(actionTimer); const t=actionText(a),pc=playerColors[a.player]||'#4169a1'; msg.style.setProperty('--pc',pc); msg.innerHTML=`<div class="who">${esc(playerLabel(a.player))}</div><div class="what">${esc(t.what)}</div><div class="detail">${esc(t.detail)}${replay?' · LAST ACTION':''}</div>`; stage.style.display='block'; arrow.innerHTML='';
- if(a.type!=='stay'&&a.to){
-   const fromEl=a.from?document.querySelector(`.line-wrap[data-line-name="${a.from}"]`):null,toEl=document.querySelector(`.line-wrap[data-line-name="${a.to}"]`);
-   if(toEl){const tr=toEl.getBoundingClientRect(),x2=tr.left+tr.width/2,y2=tr.top+72;let x1=window.innerWidth/2,y1=tr.top-22;if(fromEl){const fr=fromEl.getBoundingClientRect();x1=fr.left+fr.width/2;y1=fr.top+72}const dx=x2-x1,dy=y2-y1,len=Math.max(1,Math.hypot(dx,dy)),pad=8,sx=x1+dx/len*pad,sy=y1+dy/len*pad,ex=x2-dx/len*18,ey=y2-dy/len*18,minX=Math.min(sx,ex)-18,minY=Math.min(sy,ey)-18,maxX=Math.max(sx,ex)+18,maxY=Math.max(sy,ey)+18,w=Math.max(36,maxX-minX),h=Math.max(36,maxY-minY);arrow.style.left=`${minX}px`;arrow.style.top=`${minY}px`;arrow.style.width=`${w}px`;arrow.style.height=`${h}px`;arrow.setAttribute('viewBox',`0 0 ${w} ${h}`);const ax=sx-minX,ay=sy-minY,bx=ex-minX,by=ey-minY,ang=Math.atan2(by-ay,bx-ax),sz=10,p1x=bx-sz*Math.cos(ang-Math.PI/6),p1y=by-sz*Math.sin(ang-Math.PI/6),p2x=bx-sz*Math.cos(ang+Math.PI/6),p2y=by-sz*Math.sin(ang+Math.PI/6);arrow.innerHTML=`<path d="M ${ax} ${ay} L ${bx} ${by}" style="--pc:${pc}"></path><polygon points="${bx},${by} ${p1x},${p1y} ${p2x},${p2y}" style="--pc:${pc}"></polygon>`}
- } else {const target=document.querySelector(`.slot.ai-token[data-player="${CSS.escape(a.player)}"]`);if(target){target.classList.add('replay');setTimeout(()=>target.classList.remove('replay'),900)}}
- const duration=replay?1050:(gameSpeed===4?620:gameSpeed===2?820:1050); actionTimer=setTimeout(hideAction,duration);
+ const stage=document.querySelector('#action-stage'),arrow=document.querySelector('#action-arrow');
+ if(!stage||!arrow)return;
+ clearTimeout(actionTimer); setActionFeed(a,replay); stage.style.display=replay?'block':'none'; arrow.innerHTML='';
+ const pc=playerColors[a.player]||'#4169a1';
+ if(replay&&a.type==='move'&&a.from&&a.fromIndex!=null&&a.toIndex!=null){
+   const from=slotViewportPosition(a.from,a.fromIndex),to=slotViewportPosition(a.to,a.toIndex);
+   if(from&&to){
+     const pad=18, minX=Math.min(from.x,to.x)-pad-12,minY=Math.min(from.y,to.y)-pad-12,maxX=Math.max(from.x,to.x)+pad+12,maxY=Math.max(from.y,to.y)+pad+12,w=Math.max(60,maxX-minX),h=Math.max(60,maxY-minY);
+     arrow.style.left=`${minX}px`; arrow.style.top=`${minY}px`; arrow.style.width=`${w}px`; arrow.style.height=`${h}px`; arrow.setAttribute('viewBox',`0 0 ${w} ${h}`);
+     const sx=from.x-minX,sy=from.y-minY,tx=to.x-minX,ty=to.y-minY,dx=tx-sx,dy=ty-sy,len=Math.max(1,Math.hypot(dx,dy)),gap=10;
+     const ax=sx+dx/len*(from.size/2+gap),ay=sy+dy/len*(from.size/2+gap),bx=tx-dx/len*(to.size/2+gap),by=ty-dy/len*(to.size/2+gap),ang=Math.atan2(by-ay,bx-ax),sz=11;
+     const p1x=bx-sz*Math.cos(ang-Math.PI/6),p1y=by-sz*Math.sin(ang-Math.PI/6),p2x=bx-sz*Math.cos(ang+Math.PI/6),p2y=by-sz*Math.sin(ang+Math.PI/6);
+     arrow.innerHTML=`<rect class="action-ghost" x="${sx-from.size/2}" y="${sy-from.size/2}" width="${from.size}" height="${from.size}" rx="3"></rect><text class="action-ghost-text" x="${sx}" y="${sy}">${esc(a.label||a.player.replace('AI ','A'))}</text><path d="M ${ax} ${ay} L ${bx} ${by}" style="--pc:${pc}"></path><polygon points="${bx},${by} ${p1x},${p1y} ${p2x},${p2y}" style="--pc:${pc}"></polygon>`;
+   }
+ } else if(replay&&(a.type==='stay'||a.type==='enter')){
+   const pos=a.toIndex!=null?slotViewportPosition(a.to,a.toIndex):null;
+   if(pos){const x=pos.x,y=pos.y; arrow.style.left=`${x-24}px`;arrow.style.top=`${y-24}px`;arrow.style.width='48px';arrow.style.height='48px';arrow.setAttribute('viewBox','0 0 48 48');arrow.innerHTML=`<rect class="action-current" x="12" y="12" width="24" height="24" rx="4" style="--pc:${pc}"></rect><text class="action-current-text" x="24" y="24">${esc(a.label||a.player.replace('AI ','A'))}</text>`;}
+ }
+ const duration=replay?1300:(gameSpeed===4?900:gameSpeed===2?1050:1200); actionTimer=setTimeout(hideAction,duration);
 }
 function replayAI(p){const a=lastActions[p];if(a)showAction(a,true)}
 function human(id){if(!S.running||S.resolving||S.order[S.idx]!=='Human')return;const l=D.lines.find(x=>String(x.id)===String(id));if(!l)return;const s=line(l.id);const same=s.buffer.includes('Human');if(String(pendingLine)===String(id)){pendingLine=null;if(same){log('Human · WAIT');S.idx++;next()}else if(choose('Human',id)){S.idx++;next()}}else{pendingLine=id;render()}}
