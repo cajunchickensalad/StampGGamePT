@@ -343,7 +343,7 @@ function render(){
      const row=Math.floor(i/fv);
      const pos=i%fv;
      const col=row%2===0?pos:fv-1-pos;
-     return {row:row*2+1,col};
+     return {row:row+1,col};
    };
    for(let i=0;i<slots;i++){
      const {row,col}=posOf(i);
@@ -380,7 +380,7 @@ function render(){
    const buttonLabel=pending?'CONFIRM '+l.name:(s.buffer.length>=MAX_QUEUE&&!s.buffer.includes('Human')?'FULL · '+l.name:'LINE '+l.name);
    L.insertAdjacentHTML('beforeend',`<div class="line-wrap" data-line-name="${esc(l.name)}">
      <div class="line" style="--lc:${lineColors[l.name]||'#888'}">
-       <div class="lhead"><div class="lname">${esc(l.name)}</div><div class="stat">FV <b>${l.fixed_value}</b><span class="front-note">FRONT</span></div><div class="stat">Reward <b class="${lineRewardRemaining(l)<=1?'reward-critical':''}">${lineRewardRemaining(l)}/${l.max_rewards}</b>${lineRewardRemaining(l)===1?'<span class="reward-note reward-critical">LAST</span>':lineRewardRemaining(l)===0?'<span class="reward-note reward-empty">EMPTY</span>':''}</div><div class="stat">Max <b>21</b></div></div>
+       <div class="lhead"><div class="lname">${esc(l.name)}</div><div class="stat">FV <b>${l.fixed_value}</b> <span class="front-note">FRONT</span></div><div class="stat">Reward <b class="${lineRewardRemaining(l)<=1?'reward-critical':''}">${lineRewardRemaining(l)}/${l.max_rewards}</b>${lineRewardRemaining(l)===1?'<span class="reward-note reward-critical"> LAST</span>':lineRewardRemaining(l)===0?'<span class="reward-note reward-empty"> EMPTY</span>':''}</div><div class="stat">Max <b>21</b></div></div>
        <div class="queue">${q}</div>
      </div>
      <button class="line-action ${pending?'active':''}" style="--lc:${lineColors[l.name]||'#888'}" data-line="${esc(l.id)}" ${can?'':'disabled'}>${buttonLabel}</button>
